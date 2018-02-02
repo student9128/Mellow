@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">230dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Global margin value for all the ui in the application -->
+    <dimen name="uniform_margin">16dp</dimen>
+
+    <!-- Global padding value for all the ui in the application -->
+    <dimen name="uniform_padding">16dp</dimen>
+    <!-- elevation -->
+    <dimen name="elevation_1">1dp</dimen>
+    <dimen name="elevation_3">3dp</dimen>
+    <dimen name="elevation_5">5dp</dimen>
+    <dimen name="elevation_10">10dp</dimen>
+    <dimen name="elevation_15">15dp</dimen>
+    <!-- margin value -->
+    <dimen name="margin_1">1dp</dimen>
+    <dimen name="margin_3">3dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_50">50dp</dimen>
+
+    <!-- width value -->
+    <dimen name="width_0">0dp</dimen>
+    <dimen name="width_1">1dp</dimen>
+    <dimen name="width_2">2dp</dimen>
+    <dimen name="width_3">3dp</dimen>
+    <dimen name="width_4">4dp</dimen>
+    <dimen name="width_5">5dp</dimen>
+
+    <!-- padding value -->
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
+    <dimen name="padding_20">10dp</dimen>
+    <dimen name="padding_30">30dp</dimen>
+    <dimen name="padding_40">40dp</dimen>
+    <dimen name="padding_50">50dp</dimen>
+
+    <!--text size-->
+    <dimen name="textSize10">10sp</dimen>
+    <dimen name="textSize12">12sp</dimen>
+    <dimen name="textSize14">14sp</dimen>
+    <dimen name="textSize15">15sp</dimen>
+    <dimen name="textSize16">16sp</dimen>
+    <dimen name="textSize18">18sp</dimen>
+    <dimen name="textSize20">20sp</dimen>
+    <dimen name="textSize24">24sp</dimen>
+    <dimen name="textSize36">36sp</dimen>
+
+    <dimen name="tab_layout_height">56dp</dimen>
+
+    <dimen name="rating_bar_min_height">12dp</dimen>
+    <dimen name="rating_bar_max_height">12dp</dimen>
+</resources>

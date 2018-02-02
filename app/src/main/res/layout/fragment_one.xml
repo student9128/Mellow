@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.kevin.mellow.view.ColorTrackTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_layout_height"
+        android:background="@color/white"
+        android:elevation="@dimen/elevation_5"
+        app:tabIndicatorColor="@null"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextColor="@color/black"></com.kevin.mellow.view.ColorTrackTabLayout>
+
+    <com.kevin.mellow.view.NoSmoothViewPager
+        android:id="@+id/ns_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.kevin.mellow.view.NoSmoothViewPager>
+</LinearLayout>

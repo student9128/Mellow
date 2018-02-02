@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#2196F3</color>-->
+    <!--<color name="colorPrimaryDark">#2196F3</color>-->
+    <color name="colorAccent">#217C98</color>
+    <color name="colorPrimary">#217C98</color>
+    <color name="colorPrimaryDark">#217C98</color>
+
+    <color name="mapColor">#20FF5252</color>
+    <color name="white">#ffffff</color>
+    <color name="white_3">#F0F0F0</color>
+    <color name="white_1">#FAFAFA</color>
+    <color name="white_2">#AAFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="black_1">#88000000</color>
+    <color name="black_2">#1E2327</color>
+
+    <color name="gray">#707070</color>
+    <color name="gray_1">#EEEEEE</color>
+    <color name="gray_2">#E0E0E0</color>
+    <color name="gray_3">#F5F5F5</color>
+    <color name="gray_4">#212121</color>
+    <color name="gray_5">#303030</color>
+    <color name="gray_6">#424242</color>
+    <color name="gray_7">#BDBDBD</color>
+    <color name="gray_8">#36707070</color>
+    <color name="gray_9">#5F7F7F7F</color>
+    <color name="gray_10">#24292E</color>
+    <color name="gray_11">#BBFFFFFF</color>
+    <color name="gray_12">#C8C8C8</color>
+    <color name="gray_13">#BBBBBB</color>
+    <color name="gray_14">#FAF0F0F0</color>
+    <color name="gray_27">#ECECEC</color>
+    <color name="gray_15">#efF3F0E7</color>
+
+    <color name="bg">#3f3F51B5</color>
+    <color name="teal">#009688</color>
+    <color name="teal_1">#3EA87E</color>
+    <color name="teal_2">#00BCD4</color>
+    <color name="amber">#FFE57F</color>
+    <color name="red">#F44336</color>
+    <color name="red_2">#FC3D3D</color>
+    <color name="red_3">#8FFC3D3D</color>
+    <color name="amber_1">#FFEDB2</color>
+    <color name="green">#00E676</color>
+    <color name="amber_500">#FFC107</color>
+
+    <color name="orange_1">#FFCD8E</color>
+    <color name="blue_1">#48BAF5</color>
+    <color name="blue_500">#2196F3</color>
+    <color name="pink">#FF6C64</color>
+    <color name="red_1">#FF3E65</color>
+    <color name="pink_1">#FF5765</color>
+    <color name="pink_2">#EA6F5A</color>
+
+    <color name="light_gray">#f0f0f0</color>
+    <color name="light_white">#f5f5f5</color>
+</resources>

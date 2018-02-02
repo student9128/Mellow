@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name" translatable="false">Mellow</string>
+
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="register">Register</string>
+
+    <string name="dou_ban">Dou Ban</string>
+    <string name="one_article">One Article</string>
+    <string name="center_weather">Center Weather</string>
+    <string name="li_video">Li Video</string>
+    <string name="settings">Settings</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="statement">Created by Kevin.</string>
+
+    <string name="one_home">Home</string>
+    <string name="one_chinese_week">Week</string>
+
+    <string name="http_error_unauthorized">Unauthorized</string>
+    <string name="http_error_forbidden">Request Forbidden</string>
+    <string name="http_error_not_found">Not Found</string>
+    <string name="http_error_request_timeout">Request Timeout</string>
+    <string name="http_error_internal_server_error">Internal Server Error</string>
+    <string name="http_error_bad_gateway">Bad Gateway</string>
+    <string name="http_error_service_unavailable">Service Unavailable</string>
+    <string name="http_error_gateway_timeout">Gateway Timeout</string>
+    <string name="http_error_unknown">Unknown Error</string>
+    <string name="exception_connect">Connection Error</string>
+    <string name="exception_interrupted_io">Interrupted IO Exception</string>
+    <string name="exception_parse">Parse Error</string>
+
+    <string name="permission_external_storage_rationale">You need to grant permission to access external storage</string>
+    <string name="permission_location_rationale">You need to grant permission to access GPS Location info</string>
+    <string name="permission_common_rationale">Permission should be granted</string>
+    <string name="no_permission_to_access_camera">No permission is granted to access Camera.</string>
+    <string name="no_permission_to_access_external_storage">No permission is granted to access external storage.</string>
+    <string name="permission_camera_rationale">You need to grant permission to use the camera to take a picture.</string>
+
+
+    <string name="fingerprint_description">Confirm your fingerprint.</string>
+    <string name="fingerprint_hint">Touch sensor</string>
+
+    <!-- Button text -->
+    <string name="start_btn">Start</string>
+    <string name="cancel_btn">Cancel</string>
+
+    <string name="fingerprint_success">Fingerprint recognized.</string>
+    <string name="fingerprint_not_recognized">Fingerprint not recognized. Try again.</string>
+
+    <!-- Dialog info -->
+    <string name="no_sensor_dialog_title">No fingerprint sensor</string>
+    <string name="no_sensor_dialog_message">No fingerprint sensor on your device, click cancel to exit.</string>
+    <string name="no_fingerprint_enrolled_dialog_title">No fingerprint enrolled</string>
+    <string name="no_fingerprint_enrolled_dialog_message">No fingerprint enrolled, enter\n
+        <font fgcolor="green">Setting->Security->Nexus Imprint\n</font>
+        to enrollor click cancel to exit.</string>
+    <string name="ok_btn_dialog">OK</string>
+    <string name="cancel_btn_dialog">Cancel</string>
+
+    <!-- auth result error amd help code warning -->
+    <string name="AcquiredGood_warning">The image acquired was good.</string>
+    <string name="AcquiredImageDirty_warning">The fingerprint image was too noisy due to suspected or detected dirt on the sensor.
+        For example, it\'s reasonable to return this after multiple AcquiredInsufficient or
+        actual detection of dirt on the sensor (stuck pixels, swaths, etc.).
+        The user is expected to take action to clean the sensor when this is returned.</string>
+    <string name="AcquiredInsufficient_warning">The fingerprint image was too noisy to process due to
+        a detected condition (i.e. dry skin) or a possibly dirty sensor.</string>
+    <string name="AcquiredPartial_warning">Only a partial fingerprint image was detected.
+        During enrollment, the user should be informed on what needs to happen to resolve this problem, e.g., "press firmly on sensor."</string>
+    <string name="AcquiredTooFast_warning">The fingerprint image was incomplete due to quick motion.
+        While mostly appropriate for linear array sensors, this could also happen if the finger was moved during acquisition.
+        The user should be asked to move the finger slower (linear) or leave the finger on the sensor longer.</string>
+    <string name="AcquiredToSlow_warning">The fingerprint image was unreadable due to lack of motion.
+        This is most appropriate for linear array sensors that require a swipe motion.</string>
+    <string name="ErrorCanceled_warning">The operation was canceled because the fingerprint sensor is unavailable.
+        For example, this may happen when the user is switched,
+        the device is locked, or another pending operation prevents or disables it.</string>
+    <string name="ErrorHwUnavailable_warning">The hardware is unavailable. Try again later.</string>
+    <string name="ErrorLockout_warning">The operation was canceled because the API is locked out due to too many attempts.</string>
+    <string name="ErrorNoSpace_warning">Error state returned for operations like enrollment;
+        the operation cannot be completed because there\'s not enough storage remaining to complete the operation.</string>
+    <string name="ErrorTimeout_warning">Error state returned when the current request has been running too long.
+        This is intended to prevent programs from waiting for the fingerprint sensor indefinitely.
+        The timeout is platform and sensor-specific, but is generally about 30 seconds.</string>
+    <string name="ErrorUnableToProcess_warning">Error state returned when the sensor was unable to process the current image.</string>
+
+
+</resources>

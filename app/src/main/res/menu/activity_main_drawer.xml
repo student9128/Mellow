@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <!--<item-->
+        <!--android:id="@+id/nav_camera"-->
+        <!--android:icon="@drawable/ic_menu_camera"-->
+        <!--android:title="Import" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_gallery"-->
+        <!--android:icon="@drawable/ic_menu_gallery"-->
+        <!--android:title="Gallery" />-->
+        <item
+            android:id="@+id/nav_dou_ban"
+            android:icon="@drawable/ic_dou_ban"
+            android:title="@string/dou_ban" />
+        <item
+            android:id="@+id/nav_one_article"
+            android:icon="@drawable/ic_one_article"
+            android:title="@string/one_article" />
+        <item
+            android:icon="@drawable/ic_weather"
+            android:id="@+id/nav_center_weather"
+            android:title="@string/center_weather" />
+        <item
+            android:icon="@drawable/ic_video"
+            android:id="@+id/nav_li_video"
+            android:title="@string/li_video" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/nav_sign_out"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/sign_out" />
+
+    </group>
+</menu>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mellow</string>
+    <string name="navigation_drawer_open">打开</string>
+    <string name="navigation_drawer_close">关闭</string>
+    <string name="username">账号</string>
+    <string name="password">密码</string>
+    <string name="login">登录</string>
+    <string name="forgot_password">忘记密码</string>
+    <string name="register">注册</string>
+    <string name="dou_ban">豆瓣</string>
+    <string name="one_article">每日一文</string>
+    <string name="center_weather">中央天气</string>
+    <string name="li_video">梨视频</string>
+    <string name="settings">设置</string>
+    <string name="sign_out">退出</string>
+</resources>
