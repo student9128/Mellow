@@ -9,9 +9,11 @@
     <string name="forgot_password">忘记密码</string>
     <string name="register">注册</string>
     <string name="dou_ban">豆瓣</string>
-    <string name="one_article">每日一文</string>
+    <string name="tu_chong">图虫</string>
     <string name="center_weather">中央天气</string>
     <string name="li_video">梨视频</string>
     <string name="settings">设置</string>
     <string name="sign_out">退出</string>
+    <string name="tu_chong_recommend">推荐</string>
+    <string name="tu_chong_discover">发现</string>
 </resources>

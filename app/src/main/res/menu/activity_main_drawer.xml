@@ -15,8 +15,8 @@
             android:title="@string/dou_ban" />
         <item
             android:id="@+id/nav_one_article"
-            android:icon="@drawable/ic_one_article"
-            android:title="@string/one_article" />
+            android:icon="@drawable/ic_tu_chong"
+            android:title="@string/tu_chong" />
         <item
             android:icon="@drawable/ic_weather"
             android:id="@+id/nav_center_weather"

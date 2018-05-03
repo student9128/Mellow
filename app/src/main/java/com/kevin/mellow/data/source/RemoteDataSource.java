@@ -45,4 +45,8 @@ public interface RemoteDataSource {
     Observable<Map<String, Object>> requestDouBanMoviePhotos(String cityName, String id);
 
     Observable<Map<String, Object>> requestDouBanMovieReviews(String cityName, String id);
+
+
+
+    Observable<Map<String, Object>> requestX(String type,String postId, String page);
 }

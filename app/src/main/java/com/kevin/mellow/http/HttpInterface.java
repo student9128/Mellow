@@ -4,10 +4,13 @@ import com.kevin.mellow.bean.DouBanMovieBean;
 
 import java.util.Map;
 
+import io.reactivex.MaybeObserver;
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -39,11 +42,19 @@ public interface HttpInterface {
 //type:today,random, date:20171219
 //    @GET("article/{type}")
 //    Call<Map<String, Object>> getArticle(@Path("type") String type, @Query("dev") String dev,
-//                                         @Query("date") String date);
+//
+//                                  @Query("date") String date);
+
+
+
+    @Headers("url_name:tu_chong")
+    @GET("feed-app")
+    Observable<Map<String,Object>> getX(@QueryMap Map<String,String> map);
 
     @Headers("url_name:tou_tiao")
     @GET("api/news/feed/v51/")
     Call<Map<String, Object>> getTouTiao(@QueryMap Map<String, String> map);
+
 
     @Headers("url_name:dou_ban")
     @GET("v2/movie/in_theaters?")

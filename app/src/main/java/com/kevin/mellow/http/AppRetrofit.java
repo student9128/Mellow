@@ -31,7 +31,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppRetrofit {
     public static String BASE_URL = "http://v3.wufazhuce.com:8000/api/";
-    public static String ONE_ARTICLE_BASE_URL = "https://interface.meiriyiwen.com/";
     public static String BASE_URL_TU_CHONG = "https://api.tuchong.com/";
     public static String BASE_URL_TOU_TIAO = "http://is.snssdk.com/";
     public static String BASE_URL_NEI_HAN = "http://lf.snssdk.com/neihan/service/tabs/";
@@ -58,7 +57,7 @@ public class AppRetrofit {
 
     public AppRetrofit(String baseUrl) {
         retrofit = new Retrofit.Builder()
-                .client(initBuilder().build())
+                .client(initBaseBuilder().build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(baseUrl)
@@ -113,6 +112,21 @@ public class AppRetrofit {
                 }
             }
         });
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        builder.addInterceptor(interceptor);
+        builder.retryOnConnectionFailure(true);//连接失败后重试
+        builder.connectTimeout(20, TimeUnit.SECONDS);
+        builder.readTimeout(60, TimeUnit.SECONDS);
+        return builder;
+    }
+
+    private OkHttpClient.Builder initBaseBuilder() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.sslSocketFactory(SSLSocketFactoryUtils.createSSLSocketFactory(), SSLSocketFactoryUtils.createTrustAllManager())
+                .hostnameVerifier(new SSLSocketFactoryUtils.TrustAllHostnameVerifier());
+//        builder.sslSocketFactory(TrustManager.getUnsafeOkHttpClient())
+//                .hostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.addInterceptor(interceptor);

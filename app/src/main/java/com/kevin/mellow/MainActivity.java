@@ -17,7 +17,7 @@ import com.kevin.mellow.base.BaseActivity;
 import com.kevin.mellow.fragment.CenterWeatherFragment;
 import com.kevin.mellow.fragment.DouBanFragment;
 import com.kevin.mellow.fragment.LiVideoFragment;
-import com.kevin.mellow.fragment.OneArticleFragment;
+import com.kevin.mellow.fragment.TuChongFragment;
 import com.kevin.mellow.fragment.SettingsFragment;
 import com.kevin.mellow.utils.DisplayUtils;
 
@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 //    public ActionBar actionBar;
 
     private DouBanFragment douBanFragment;
-    private OneArticleFragment oneArticleFragment;
+    private TuChongFragment oneArticleFragment;
     private CenterWeatherFragment centerWeatherFragment;
     private LiVideoFragment liVideoFragment;
     private SettingsFragment settingsFragment;
@@ -214,10 +214,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 break;
             case R.id.nav_one_article:
                 if (oneArticleFragment == null) {
-                    oneArticleFragment = OneArticleFragment.newInstance(getString(R.string.one_article));
+                    oneArticleFragment = TuChongFragment.newInstance(getString(R.string.tu_chong));
                 }
                 switchFragment(oneArticleFragment);
-                actionBar.setTitle(getString(R.string.one_article));
+                actionBar.setTitle(getString(R.string.tu_chong));
                 break;
             case R.id.nav_center_weather:
                 if (centerWeatherFragment == null) {

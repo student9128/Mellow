@@ -26,7 +26,6 @@ public abstract class BaseFragment extends AppBaseFragment {
     public Unbinder unbinder;
     private boolean isViewCreated = false;
     private boolean isUIVisible = false;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

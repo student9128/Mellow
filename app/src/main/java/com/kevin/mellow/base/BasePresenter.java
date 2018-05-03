@@ -9,4 +9,6 @@ package com.kevin.mellow.base;
 
 
 public interface BasePresenter {
+
+
 }

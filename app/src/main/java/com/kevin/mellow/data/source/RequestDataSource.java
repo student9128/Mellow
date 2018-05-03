@@ -6,6 +6,7 @@ import com.kevin.mellow.bean.DouBanMovieBean;
 import com.kevin.mellow.http.AppRetrofit;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -91,9 +92,16 @@ public class RequestDataSource implements RemoteDataSource {
         map.put("aid", "0");
         map.put("page", "1");
         map.put("type", "refresh");
-//        map.put("post_id","")
+        map.put("post_id","");
         return new AppRetrofit().getHttpService().getArticle(map);
     }
+
+//    @Override
+//    public Call<Map<String, Object>> requestOneArticle() {
+////        Map<String, String> map = new HashMap<>();
+//        return new AppRetrofit().getHttpService().getOneArticle();
+//    }
+
 
     @Override
     public Call<Map<String, Object>> requestTouTiao() {
@@ -182,5 +190,37 @@ public class RequestDataSource implements RemoteDataSource {
         map.put("start", "0");
         return AppRetrofit.getInstance().getHttpService().getMovieReviews(id, map);
     }
+
+
+    @Override
+    public Observable<Map<String, Object>> requestX(String type,String postId, String page) {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("os_api", "22");
+        map.put("device_type", "");
+        map.put("device_platform", "android");
+        map.put("ssmix", "a");
+        map.put("manifest_version_code", "232");
+        map.put("dpi", "400");
+        map.put("abflag", "0");
+        map.put("uuid", "");
+        map.put("version_code", "232");
+        map.put("openudid", "");
+        map.put("resolution", "");
+        map.put("os_version", "");
+        map.put("ac", "wifi");
+        map.put("aid", "0");
+        map.put("app_name", "");
+        map.put("version_name", "");
+//        if (isFirst) {
+////如果是第一页则不需要添加该字段。否则，需要加上该字段，该字段的值为上一页最后一个 json 中的 post_id 值
+//        } else {
+//            map.put("post_id", postId);
+//        }
+        map.put("post_id",postId);
+        map.put("page", page);
+        map.put("type", type);
+        return AppRetrofit.getInstance().getHttpService().getX(map);
+    }
+
 
 }
