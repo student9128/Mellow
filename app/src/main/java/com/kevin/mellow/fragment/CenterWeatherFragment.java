@@ -45,4 +45,9 @@ public class CenterWeatherFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void loadData() {
+
+    }
+
 }

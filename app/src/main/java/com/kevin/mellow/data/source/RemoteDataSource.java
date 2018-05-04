@@ -23,12 +23,6 @@ public interface RemoteDataSource {
 
     Call<Map<String, Object>> requestItemList();
 
-    /**
-     * @param type random,today,day
-     * @param date
-     * @return
-     */
-    Call<Map<String, Object>> requestArticle(String type, String date);
 
     Call<Map<String, Object>> requestTouTiao();
 
@@ -47,6 +41,7 @@ public interface RemoteDataSource {
     Observable<Map<String, Object>> requestDouBanMovieReviews(String cityName, String id);
 
 
+    Observable<Map<String, Object>> requestTuChongRecommend(String type, String postId, String page);
 
-    Observable<Map<String, Object>> requestX(String type,String postId, String page);
+    Observable<Map<String, Object>> requestTuDiscover();
 }

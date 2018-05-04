@@ -11,14 +11,10 @@ import com.kevin.mellow.data.source.RequestDataSource;
 import java.util.Map;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> on 2018/5/3.
@@ -43,7 +39,7 @@ public class TuChongPresenter implements TuChongContract.Presenter {
     public void requestData(String type,String postId,String page,boolean isFirst) {
 
 
-        Observable<Map<String, Object>> mapObservable = requestDataSource.requestX(type,postId,page);
+        Observable<Map<String, Object>> mapObservable = requestDataSource.requestTuChongRecommend(type,postId,page);
         mapObservable.subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override

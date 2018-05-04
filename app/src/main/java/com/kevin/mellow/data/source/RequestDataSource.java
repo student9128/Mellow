@@ -70,32 +70,7 @@ public class RequestDataSource implements RemoteDataSource {
         map.put("source_id", "9261");
         return new AppRetrofit().getHttpService().getItemList(map);
     }
-
-    @Override
-    public Call<Map<String, Object>> requestArticle(String type, String date) {
-//        return new AppRetrofit().getHttpService()
-//                .getArticle(type, "1", date);
-        Map<String, String> map = new HashMap<>();
-        map.put("os_api", "");
-        map.put("device_type", "");
-        map.put("device_platform", "");
-        map.put("ssmix", "a");
-        map.put("manifest_version_code", "232");
-        map.put("dpi", "");
-        map.put("abflag", "0");
-        map.put("uuid", "");
-        map.put("version_code", "");
-        map.put("openudid", "65143269dafd1f3a5");
-        map.put("resolution", "");
-        map.put("os_version", "");
-        map.put("ac", "");
-        map.put("aid", "0");
-        map.put("page", "1");
-        map.put("type", "refresh");
-        map.put("post_id","");
-        return new AppRetrofit().getHttpService().getArticle(map);
-    }
-
+    
 //    @Override
 //    public Call<Map<String, Object>> requestOneArticle() {
 ////        Map<String, String> map = new HashMap<>();
@@ -193,7 +168,7 @@ public class RequestDataSource implements RemoteDataSource {
 
 
     @Override
-    public Observable<Map<String, Object>> requestX(String type,String postId, String page) {
+    public Observable<Map<String, Object>> requestTuChongRecommend(String type, String postId, String page) {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("os_api", "22");
         map.put("device_type", "");
@@ -219,7 +194,29 @@ public class RequestDataSource implements RemoteDataSource {
         map.put("post_id",postId);
         map.put("page", page);
         map.put("type", type);
-        return AppRetrofit.getInstance().getHttpService().getX(map);
+        return AppRetrofit.getInstance().getHttpService().getTuChongRecommend(map);
+    }
+
+    @Override
+    public Observable<Map<String, Object>> requestTuDiscover() {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("os_api", "22");
+        map.put("device_type", "");
+        map.put("device_platform", "android");
+        map.put("ssmix", "a");
+        map.put("manifest_version_code", "232");
+        map.put("dpi", "400");
+        map.put("abflag", "0");
+        map.put("uuid", "");
+        map.put("version_code", "232");
+        map.put("openudid", "");
+        map.put("resolution", "");
+        map.put("os_version", "");
+        map.put("ac", "wifi");
+        map.put("aid", "0");
+        map.put("app_name", "");
+        map.put("version_name", "");
+        return AppRetrofit.getInstance().getHttpService().getTuChongDiscover(map);
     }
 
 

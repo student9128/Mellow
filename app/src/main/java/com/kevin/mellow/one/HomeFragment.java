@@ -64,6 +64,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     @Override
+    public void loadData() {
+
+    }
+
+    @Override
     public void setPresenter(HomeContract.Presenter presenter) {
         this.mPresenter = presenter;
     }

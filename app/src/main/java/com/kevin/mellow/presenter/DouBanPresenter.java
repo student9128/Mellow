@@ -69,6 +69,11 @@ public class DouBanPresenter implements DouBanContract.Presenter {
                                 view.loadMoreData(subjects);
                             }
                         }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
                         view.refreshFinish();
                     }
                 });

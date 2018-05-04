@@ -104,6 +104,11 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     }
 
     @Override
+    public void loadData() {
+
+    }
+
+    @Override
     public void setPresenter(LoginContract.Presenter presenter) {
 
     }

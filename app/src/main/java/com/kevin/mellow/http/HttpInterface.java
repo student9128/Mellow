@@ -36,20 +36,19 @@ public interface HttpInterface {
     @GET("essay/1713")
     Call<Map<String, Object>> getItemList(@QueryMap Map<String, String> map);
 
-    @Headers("url_name:tu_chong")
-    @GET("feed-app")
-    Call<Map<String, Object>> getArticle(@QueryMap Map<String, String> map);
 //type:today,random, date:20171219
 //    @GET("article/{type}")
 //    Call<Map<String, Object>> getArticle(@Path("type") String type, @Query("dev") String dev,
 //
 //                                  @Query("date") String date);
 
-
+    @Headers("url_name:tu_chong")
+    @GET("discover-app")
+    Observable<Map<String, Object>> getTuChongDiscover(@QueryMap Map<String, String> map);
 
     @Headers("url_name:tu_chong")
     @GET("feed-app")
-    Observable<Map<String,Object>> getX(@QueryMap Map<String,String> map);
+    Observable<Map<String, Object>> getTuChongRecommend(@QueryMap Map<String, String> map);
 
     @Headers("url_name:tou_tiao")
     @GET("api/news/feed/v51/")

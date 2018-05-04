@@ -101,6 +101,11 @@ public class ChineseWeekFragment extends BaseFragment implements ChineseContract
     }
 
     @Override
+    public void loadData() {
+
+    }
+
+    @Override
     public void setPresenter(ChineseContract.Presenter presenter) {
         this.mPresenter = presenter;
     }

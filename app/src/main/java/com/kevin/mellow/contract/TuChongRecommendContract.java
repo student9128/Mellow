@@ -2,6 +2,7 @@ package com.kevin.mellow.contract;
 
 import com.kevin.mellow.base.BasePresenter;
 import com.kevin.mellow.base.BaseView;
+import com.kevin.mellow.bean.TuChongDiscoverBean;
 import com.kevin.mellow.bean.TuChongFeedBean;
 
 import java.util.List;
@@ -28,9 +29,18 @@ public class TuChongRecommendContract {
 
     }
 
+    public interface DiscoverView extends BaseView<Presenter> {
+        void showTips(String msg);
+
+        void updateBanner(List<TuChongDiscoverBean.BannersBean> d);
+
+        void setBannerAutoScroll();
+    }
+
     public interface Presenter extends BasePresenter {
         //        void requestData(String type, String date);
         void requestData(String type, String postId, String page);
 
+        void requestDiscoverData();
     }
 }

@@ -81,6 +81,11 @@ public class OneFragment extends BaseFragment {
     public void initListener() {
     }
 
+    @Override
+    public void loadData() {
+
+    }
+
     private void initTabList() {
         mTabList.clear();
         mTabList.add(getString(R.string.one_home));

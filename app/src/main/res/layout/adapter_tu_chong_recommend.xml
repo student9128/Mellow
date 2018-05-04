@@ -20,6 +20,7 @@
         android:paddingBottom="@dimen/padding_5">
 
         <RelativeLayout
+            android:id="@+id/rl_image_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -30,41 +31,67 @@
                 tools:src="@drawable/ic_m_logo_black" />
 
             <TextView
-                android:background="@color/gray_16"
                 android:id="@+id/tv_title"
-                android:paddingBottom="@dimen/padding_5"
-                android:paddingTop="@dimen/padding_5"
-                android:paddingLeft="@dimen/padding_10"
-                android:paddingRight="@dimen/padding_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/gray_16"
+                android:paddingBottom="@dimen/padding_5"
+                android:paddingLeft="@dimen/padding_10"
+                android:paddingRight="@dimen/padding_10"
+                android:paddingTop="@dimen/padding_5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textSize16"
                 android:textStyle="bold" />
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rl_author_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/margin_10"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/iv_author_avatar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="@dimen/margin_10" />
-            <TextView
-                android:id="@+id/tv_author_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ll_author_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:layout_marginLeft="@dimen/margin_10"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_marginBottom="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_author_avatar"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/margin_10" />
+
+                <TextView
+                    android:id="@+id/tv_author_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSize15" />
+
+                <TextView
+                    android:id="@+id/tv_passed_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:textSize="@dimen/textSize12" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_excerpt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_author_container"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingLeft="@dimen/padding_50"
+                android:paddingRight="@dimen/uniform_padding" />
+        </RelativeLayout>
+
+        <include layout="@layout/layout_item_footer_comments" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

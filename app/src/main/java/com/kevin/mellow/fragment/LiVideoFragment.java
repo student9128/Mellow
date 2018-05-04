@@ -46,4 +46,9 @@ public class LiVideoFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void loadData() {
+
+    }
+
 }

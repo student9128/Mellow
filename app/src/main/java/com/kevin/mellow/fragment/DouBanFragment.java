@@ -84,7 +84,6 @@ public class DouBanFragment extends BaseFragment implements DouBanContract.View,
 
     @Override
     public void initData() {
-        mPresenter.requestData("上海", String.valueOf(pageNum), Constants.TYPE_REFRESH);
     }
 
     @Override
@@ -92,6 +91,12 @@ public class DouBanFragment extends BaseFragment implements DouBanContract.View,
         smartRefresh.setOnRefreshListener(this);
         smartRefresh.setOnLoadmoreListener(this);
         mAdapter.setOnRecyclerViewItemClickListener(this);
+    }
+
+    @Override
+    public void loadData() {
+        mPresenter.requestData("上海", String.valueOf(pageNum), Constants.TYPE_REFRESH);
+
     }
 
 

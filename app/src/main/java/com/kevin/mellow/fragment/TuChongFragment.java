@@ -84,6 +84,11 @@ public class TuChongFragment extends BaseFragment implements BottomNavigationBar
         bottomNavigationBar.setTabSelectedListener(this);
     }
 
+    @Override
+    public void loadData() {
+
+    }
+
 //    @Override
 //    public void setPresenter(TuChongContract.Presenter presenter) {
 //        mPresenter = presenter;

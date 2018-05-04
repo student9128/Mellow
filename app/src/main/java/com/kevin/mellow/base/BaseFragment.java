@@ -48,6 +48,12 @@ public abstract class BaseFragment extends AppBaseFragment {
     public void onStart() {
         super.onStart();
 //        refreshUI();
+        if (getUserVisibleHint()) {
+            isUIVisible = true;
+            lazyLoad();
+        } else {
+            isUIVisible = false;
+        }
     }
 
     @Override
@@ -83,8 +89,11 @@ public abstract class BaseFragment extends AppBaseFragment {
         }
     }
     private void lazyLoad() {
+        printLogd(isUIVisible+"============isUIVisible");
+        printLogd(isViewCreated+"------------isViewCreated");
         if (isViewCreated && isUIVisible) {
 //            mPresenter.requestData();
+            loadData();
             isUIVisible = false;
             isViewCreated = false;
         }
@@ -103,6 +112,7 @@ public abstract class BaseFragment extends AppBaseFragment {
 
     public abstract void initListener();
 
+    public abstract void loadData();
     /**
      * refresh user interface.
      */
