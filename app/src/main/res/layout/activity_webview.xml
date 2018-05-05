@@ -15,11 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"></WebView>
 
+        <!--style="?android:attr/progressBarStyleHorizontal"-->
         <ProgressBar
             android:id="@+id/pb_progress_bar"
-            style="?android:attr/progressBarStyleHorizontal"
+            style="@style/WebViewProgressStyle"
             android:layout_width="match_parent"
             android:layout_height="3dp"
+            android:layout_margin="0dp"
+            android:padding="0dp"
             android:visibility="invisible" />
     </FrameLayout>
 </LinearLayout>
