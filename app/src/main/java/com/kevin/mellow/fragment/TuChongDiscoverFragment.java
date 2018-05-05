@@ -41,6 +41,11 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     private static final int UPDATE_VIEWPAGER = 100;
     private boolean isLoop = true;
     private Timer mTimer = new Timer();
+    /**
+     * 第一次进来设置一个index，切换的时候就设置后面的index
+     */
+    private boolean isFirst = true;
+
     public static TuChongDiscoverFragment newInstance(String s) {
         TuChongDiscoverFragment fragment = new TuChongDiscoverFragment();
         Bundle bundle = new Bundle();
@@ -52,6 +57,8 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        mTimer = new Timer();
+        isLoop = true;
         mPresenter = new TuChongRecommendPresenter(this, RequestDataSource.getInstance());
     }
 
@@ -67,13 +74,11 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     }
 
 
-
     @Override
     public void initData() {
 
 
     }
-
 
 
     @Override
@@ -94,6 +99,10 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
         });
     }
 
+    /**
+     * 在onStart()时候切换
+     * onCrateView时候请求数据，快速切换fragment的时候，updateBanner里的viewpager会报空指针
+     */
     @Override
     public void loadData() {
         mPresenter.requestDiscoverData();
@@ -109,7 +118,17 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     public void updateBanner(List<TuChongDiscoverBean.BannersBean> d) {
         if (d.size() > 0) {
             mAdapter.updateBanner(d);
-            viewPager.setCurrentItem(50000 * (d.size()));
+            if (isFirst) {
+                if (viewPager != null) {
+
+                    viewPager.setCurrentItem(50000 * (d.size()));
+                }
+            } else {
+                if (viewPager != null) {
+
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
+                }
+            }
         }
     }
 
@@ -129,7 +148,9 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
             super.handleMessage(msg);
             switch (msg.what) {
                 case UPDATE_VIEWPAGER:
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
+                    if (viewPager != null) {
+                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
+                    }
                     break;
             }
         }
@@ -149,4 +170,11 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
         }, 5000, 2000);//这里定义了轮播图切换的间隔时间
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+//        mTimer.cancel();//每次都要创建Timer出现轮播图从第一张跳到其他张的问题，因为index是停止前的
+        //界面不显示了就不循环了，这样可以解决viewpager报空指针的问题
+        isLoop = false;
+    }
 }

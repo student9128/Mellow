@@ -35,13 +35,20 @@ public abstract class BaseFragment extends AppBaseFragment {
         initView();
         initData();
         initListener();
-        printLogi("onCreateVew");
+        printLogi("onCreateVew===========");
+//        if (getUserVisibleHint()) {
+//            isUIVisible = true;
+//            lazyLoad();
+//        } else {
+//            isUIVisible = false;
+//        }
         return mView;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        printLogi("onAttach===========");
     }
 
     @Override
@@ -54,22 +61,50 @@ public abstract class BaseFragment extends AppBaseFragment {
         } else {
             isUIVisible = false;
         }
+        printLogi("onStart===============");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        printLogi("onResume=======");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        printLogi("onPause=====");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        printLogd("onStop======");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        printLoge("onDestroy=======");
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        printLogi("onCreate==============");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        printLogi("onActivityCreated============");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        printLogi("onDestroyView===========");
     }
 
     @Override
@@ -77,6 +112,7 @@ public abstract class BaseFragment extends AppBaseFragment {
         super.onViewCreated(view, savedInstanceState);
         isViewCreated = true;
         lazyLoad();
+        printLogi("onViewCreated==========");
     }
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

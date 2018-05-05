@@ -120,12 +120,14 @@ public class TuChongRecommendFragment extends BaseFragment implements TuChongRec
 
     @Override
     public void refreshFinish() {
+        if (smartRefresh != null) {
 
-        if (smartRefresh.isRefreshing()) {
-            smartRefresh.finishRefresh();
-        }
-        if (smartRefresh.isLoading()) {
-            smartRefresh.finishLoadmore();
+            if (smartRefresh.isRefreshing()) {
+                smartRefresh.finishRefresh();
+            }
+            if (smartRefresh.isLoading()) {
+                smartRefresh.finishLoadmore();
+            }
         }
     }
 

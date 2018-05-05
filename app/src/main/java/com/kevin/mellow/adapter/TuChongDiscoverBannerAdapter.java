@@ -52,17 +52,18 @@ public class TuChongDiscoverBannerAdapter extends PagerAdapter {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_item_tu_chong_discover_banner, null);
         ImageView ivImage = view.findViewById(R.id.iv_image);
         if (bannerData.size() > 0) {
-        position %= bannerData.size();
-        if (position < 0) {
-            position = position + bannerData.size();
-        }
-        view.setTag(position);
-        Glide.with(context)
-                .load(bannerData.get(position).getSrc())
-                .apply(new RequestOptions().centerCrop())
-                .apply(new RequestOptions().placeholder(R.drawable.ic_mellow_place_holder))
-                .apply(new RequestOptions().error(R.drawable.ic_failed))
-                .into(ivImage);
+            position %= bannerData.size();
+            if (position < 0) {
+                position = position + bannerData.size();
+            }
+            TuChongDiscoverBean.BannersBean tag = bannerData.get(position);
+            view.setTag(tag);
+            Glide.with(context)
+                    .load(tag.getSrc())
+                    .apply(new RequestOptions().centerCrop())
+                    .apply(new RequestOptions().placeholder(R.drawable.ic_mellow_place_holder))
+                    .apply(new RequestOptions().error(R.drawable.ic_failed))
+                    .into(ivImage);
         }
         container.addView(view);
         return view;
@@ -75,6 +76,12 @@ public class TuChongDiscoverBannerAdapter extends PagerAdapter {
 
     @Override
     public int getItemPosition(@NonNull Object object) {
-        return POSITION_NONE;
+        TuChongDiscoverBean.BannersBean tag = (TuChongDiscoverBean.BannersBean) ((View) object).getTag();
+        int position = bannerData.indexOf(tag);
+        if (position > 0) {
+            return position;
+        } else {
+            return POSITION_NONE;
+        }
     }
 }
