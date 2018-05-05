@@ -57,7 +57,7 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        mTimer = new Timer();
+        mTimer = new Timer();
         isLoop = true;
         mPresenter = new TuChongRecommendPresenter(this, RequestDataSource.getInstance());
     }
@@ -118,17 +118,18 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     public void updateBanner(List<TuChongDiscoverBean.BannersBean> d) {
         if (d.size() > 0) {
             mAdapter.updateBanner(d);
-            if (isFirst) {
-                if (viewPager != null) {
-
-                    viewPager.setCurrentItem(50000 * (d.size()));
-                }
-            } else {
-                if (viewPager != null) {
-
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
-                }
-            }
+            printLogd("0000000000isFirst  "+isFirst);
+            //这里不能设置viewpage的item，来回切换后发生轮播速度越来越快的情况
+//            if (isFirst) {
+//                if (viewPager != null) {
+//                    viewPager.setCurrentItem(50000 * (d.size()));
+//                }
+//            } else {
+//                if (viewPager != null) {
+//                    printLogd("``~~~~~~~~~~`" + viewPager.getCurrentItem());
+//                    viewPager.setCurrentItem(viewPager.getCurrentItem(),true);
+//                }
+//            }
         }
     }
 
@@ -167,13 +168,14 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
                     handler.sendMessage(message);
                 }
             }
-        }, 5000, 2000);//这里定义了轮播图切换的间隔时间
+        }, 5000, 5000);//这里定义了轮播图切换的间隔时间
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        mTimer.cancel();//每次都要创建Timer出现轮播图从第一张跳到其他张的问题，因为index是停止前的
+        //取消，然后重建，不然的话，timer一直再运行，下次回来会有好多任务在运行
+        mTimer.cancel();//每次都要创建Timer出现轮播图从第一张跳到其他张的问题，因为index是停止前的
         //界面不显示了就不循环了，这样可以解决viewpager报空指针的问题
         isLoop = false;
     }
