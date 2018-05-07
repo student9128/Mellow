@@ -49,7 +49,7 @@ public class TuChongDiscoverBannerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = LayoutInflater.from(context).inflate(R.layout.adapter_item_tu_chong_discover_banner, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_tu_chong_discover_banner, null);
         ImageView ivImage = view.findViewById(R.id.iv_image);
         if (bannerData.size() > 0) {
             position %= bannerData.size();

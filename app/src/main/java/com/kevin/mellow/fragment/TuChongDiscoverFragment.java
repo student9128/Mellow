@@ -5,17 +5,23 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.kevin.mellow.R;
 import com.kevin.mellow.adapter.TuChongDiscoverBannerAdapter;
+import com.kevin.mellow.adapter.TuChongDiscoverHotEventAdapter;
 import com.kevin.mellow.base.BaseFragment;
 import com.kevin.mellow.bean.TuChongDiscoverBean;
 import com.kevin.mellow.constant.Constants;
 import com.kevin.mellow.contract.TuChongRecommendContract;
 import com.kevin.mellow.data.source.RequestDataSource;
 import com.kevin.mellow.presenter.TuChongRecommendPresenter;
+import com.kevin.mellow.view.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +29,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -35,6 +42,9 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     @BindView(R.id.view_pager)
     ViewPager viewPager;
     Unbinder unbinder;
+    @BindView(R.id.rv_recycler_view)
+    RecyclerView rvRecyclerView;
+    Unbinder unbinder1;
     private TuChongRecommendContract.Presenter mPresenter;
     private TuChongDiscoverBannerAdapter mAdapter;
     private List<TuChongDiscoverBean.BannersBean> bannerData = new ArrayList<>();
@@ -45,6 +55,8 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
      * 第一次进来设置一个index，切换的时候就设置后面的index
      */
     private boolean isFirst = true;
+    private TuChongDiscoverHotEventAdapter mHotEventAdapter;
+    private List<TuChongDiscoverBean.HotEventsBean> hotEventData = new ArrayList<>();
 
     public static TuChongDiscoverFragment newInstance(String s) {
         TuChongDiscoverFragment fragment = new TuChongDiscoverFragment();
@@ -71,6 +83,19 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     public void initView() {
         mAdapter = new TuChongDiscoverBannerAdapter(mActivity, bannerData);
         viewPager.setAdapter(mAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity,
+                LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rvRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL_LIST);
+        dividerItemDecoration.setDivider(R.drawable.bg_recycler_divider);
+        rvRecyclerView.addItemDecoration(dividerItemDecoration);
+        mHotEventAdapter = new TuChongDiscoverHotEventAdapter(mActivity, hotEventData);
+        rvRecyclerView.setAdapter(mHotEventAdapter);
     }
 
 
@@ -118,7 +143,7 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     public void updateBanner(List<TuChongDiscoverBean.BannersBean> d) {
         if (d.size() > 0) {
             mAdapter.updateBanner(d);
-            printLogd("0000000000isFirst  "+isFirst);
+//            printLogd("0000000000isFirst  " + isFirst);
             //这里不能设置viewpage的item，来回切换后发生轮播速度越来越快的情况
 //            if (isFirst) {
 //                if (viewPager != null) {
@@ -136,6 +161,13 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     @Override
     public void setBannerAutoScroll() {
         setAutoScroll();
+    }
+
+    @Override
+    public void showHotEvent(List<TuChongDiscoverBean.HotEventsBean> d) {
+        if (d.size() > 0) {
+        mHotEventAdapter.updateData(d);
+        }
     }
 
     @Override
@@ -178,5 +210,14 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
         mTimer.cancel();//每次都要创建Timer出现轮播图从第一张跳到其他张的问题，因为index是停止前的
         //界面不显示了就不循环了，这样可以解决viewpager报空指针的问题
         isLoop = false;
+        unbinder1.unbind();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder1 = ButterKnife.bind(this, rootView);
+        return rootView;
     }
 }

@@ -117,6 +117,8 @@ public class TuChongRecommendPresenter implements TuChongRecommendContract.Prese
                                 .toJson(stringObjectMap), TuChongDiscoverBean.class);
                         List<TuChongDiscoverBean.BannersBean> banners = tuChongDiscoverBean.getBanners();
                         discoverView.updateBanner(banners);
+                        List<TuChongDiscoverBean.HotEventsBean> hotEvents = tuChongDiscoverBean.getHotEvents();
+                        discoverView.showHotEvent(hotEvents);
                     }
 
                     @Override

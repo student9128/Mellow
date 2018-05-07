@@ -35,6 +35,8 @@ public class TuChongRecommendContract {
         void updateBanner(List<TuChongDiscoverBean.BannersBean> d);
 
         void setBannerAutoScroll();
+
+        void showHotEvent(List<TuChongDiscoverBean.HotEventsBean> d);
     }
 
     public interface Presenter extends BasePresenter {
