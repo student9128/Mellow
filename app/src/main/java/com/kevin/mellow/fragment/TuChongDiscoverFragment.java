@@ -1,5 +1,6 @@
 package com.kevin.mellow.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kevin.mellow.R;
+import com.kevin.mellow.activity.WebViewActivity;
 import com.kevin.mellow.adapter.TuChongDiscoverBannerAdapter;
 import com.kevin.mellow.adapter.TuChongDiscoverHotEventAdapter;
 import com.kevin.mellow.base.BaseFragment;
@@ -38,13 +40,11 @@ import butterknife.Unbinder;
  * Describe:
  * <h3/>
  */
-public class TuChongDiscoverFragment extends BaseFragment implements TuChongRecommendContract.DiscoverView {
+public class TuChongDiscoverFragment extends BaseFragment implements TuChongRecommendContract.DiscoverView, TuChongDiscoverHotEventAdapter.OnRecyclerItemClickListener {
     @BindView(R.id.view_pager)
     ViewPager viewPager;
-    Unbinder unbinder;
     @BindView(R.id.rv_recycler_view)
     RecyclerView rvRecyclerView;
-    Unbinder unbinder1;
     private TuChongRecommendContract.Presenter mPresenter;
     private TuChongDiscoverBannerAdapter mAdapter;
     private List<TuChongDiscoverBean.BannersBean> bannerData = new ArrayList<>();
@@ -90,7 +90,7 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
                 return false;
             }
         };
-        rvRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        rvRecyclerView.setLayoutManager(linearLayoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL_LIST);
         dividerItemDecoration.setDivider(R.drawable.bg_recycler_divider);
         rvRecyclerView.addItemDecoration(dividerItemDecoration);
@@ -122,6 +122,8 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
                 return false;
             }
         });
+        mHotEventAdapter.setOnImageClickListener(this);
+        mHotEventAdapter.setOnTopicViewItemClickListener(this);
     }
 
     /**
@@ -210,14 +212,21 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
         mTimer.cancel();//每次都要创建Timer出现轮播图从第一张跳到其他张的问题，因为index是停止前的
         //界面不显示了就不循环了，这样可以解决viewpager报空指针的问题
         isLoop = false;
-        unbinder1.unbind();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
+    public void onTopicViewItemClick(int position) {
+        String url = hotEventData.get(position).getUrl();
+        Intent intent = new Intent(mActivity, WebViewActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onImageClick(int position) {
+        String url = hotEventData.get(position).getIntroduction_url();
+        Intent intent = new Intent(mActivity, WebViewActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
     }
 }
