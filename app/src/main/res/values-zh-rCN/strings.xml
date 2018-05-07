@@ -16,4 +16,7 @@
     <string name="sign_out">退出</string>
     <string name="tu_chong_recommend">推荐</string>
     <string name="tu_chong_discover">发现</string>
+
+    <string name="action_open_in_browser">在浏览器中打开</string>
+    <string name="action_copy_url">复制链接</string>
 </resources>

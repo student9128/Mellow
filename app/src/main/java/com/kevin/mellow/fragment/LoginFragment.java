@@ -148,7 +148,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
                 mPresenter.login(username, password);
 
 
-//                // start fingerprint auth here.
+                // start fingerprint auth here.
 //                try {
 //                    CryptoObjectHelper cryptoObjectHelper = new CryptoObjectHelper();
 //                    if (cancellationSignal == null) {

@@ -23,6 +23,9 @@
     <string name="tu_chong_recommend">Recommend</string>
     <string name="tu_chong_discover">Discover</string>
 
+    <string name="action_open_in_browser">Open in browser</string>
+    <string name="action_copy_url">Copy url</string>
+
     <string name="one_home">Home</string>
     <string name="one_chinese_week">Week</string>
 

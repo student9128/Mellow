@@ -1,12 +1,31 @@
 apply plugin: 'com.android.application'
 
+
+def keystoreFilepath = ''
+def RELEASE_KEY_PASSWORD = ''
+def RELEASE_KEY_ALIAS = ''
+def RELEASE_STORE_PASSWORD = ''
+// default keystore file, PLZ config file path in local.properties
+def RELEASE_STORE_FILE = file('s.keystore.temp')
+
+Properties properties = new Properties()
+// local.properties file in the root director
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+keystoreFilepath = properties.getProperty("RELEASE_STORE_FILE")
+
+if (keystoreFilepath) {
+    RELEASE_KEY_PASSWORD = properties.getProperty("RELEASE_KEY_PASSWORD")
+    RELEASE_KEY_ALIAS = properties.getProperty("RELEASE_KEY_ALIAS")
+    RELEASE_STORE_PASSWORD = properties.getProperty("RELEASE_STORE_PASSWORD")
+    RELEASE_STORE_FILE = file(keystoreFilepath)
+}
 android {
     signingConfigs {
         release {
-            keyAlias 'mellow'
-            keyPassword '123456'
-            storeFile file('E:/BDemo/Mellow/key.jks')
-            storePassword '123456'
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
         }
     }
     compileSdkVersion 27
@@ -64,4 +83,10 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-6'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-6'
     //没有使用特殊Header，可以不加这行
+
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
+
+    compile ('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
+        transitive = true
+    }
 }
