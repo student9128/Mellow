@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.kevin.mellow.R;
 import com.kevin.mellow.bean.TuChongDiscoverBean;
+import com.kevin.mellow.utils.DateUtils;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class TuChongDiscoverHotEventAdapter extends RecyclerView
         holder.tvCreateDate.setText("发起日期：" + DateUtils.dateFormat5(createdAt));
         String endAt = hotEventsBean.getEnd_at();
         holder.tvEndDate.setText("截止日期：" + DateUtils.dateFormat5(endAt));
-        int remainDays = new Double(hotEventsBean.getRemainingDays()).intValue();
+        int remainDays = new Double(hotEventsBean.getDueDays()).intValue();
         String s = String.valueOf(remainDays);
         int imageCount = new Double(hotEventsBean.getImage_count()).intValue();
         String s1 = String.valueOf(imageCount);
