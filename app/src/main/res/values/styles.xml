@@ -13,6 +13,9 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
+
+    </style>
     <style name="ToolbarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="colorControlNormal">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
@@ -43,5 +46,8 @@
         <item name="android:minHeight">20dip</item>
         <item name="android:maxHeight">20dip</item>
         <item name="android:mirrorForRtl">true</item>
+    </style>
+    <style name="ProgressBarStyle" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">@color/colorPrimary</item>
     </style>
 </resources>

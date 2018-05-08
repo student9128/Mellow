@@ -56,7 +56,7 @@ public class TuChongRecommendPresenter implements TuChongRecommendContract.Prese
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
-
+                        view.showProgressDialog();
                     }
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -89,6 +89,7 @@ public class TuChongRecommendPresenter implements TuChongRecommendContract.Prese
                     public void onComplete() {
                         super.onComplete();
                         view.refreshFinish();
+                        view.dismissProgressDialog();
                     }
                 });
 
@@ -101,7 +102,7 @@ public class TuChongRecommendPresenter implements TuChongRecommendContract.Prese
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
-
+                        discoverView.showProgressDialog();
                     }
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -125,6 +126,7 @@ public class TuChongRecommendPresenter implements TuChongRecommendContract.Prese
                     public void onComplete() {
                         super.onComplete();
                         discoverView.setBannerAutoScroll();
+                        discoverView.dismissProgressDialog();
                     }
                 });
     }

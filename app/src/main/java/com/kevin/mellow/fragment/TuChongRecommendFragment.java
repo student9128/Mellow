@@ -170,4 +170,14 @@ public class TuChongRecommendFragment extends BaseFragment implements TuChongRec
         intent.putExtra("url", url);
         startActivity(intent);
     }
+
+    @Override
+    public void showProgressDialog() {
+        showLoadingDialog();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        dismissLoadingDialog();
+    }
 }

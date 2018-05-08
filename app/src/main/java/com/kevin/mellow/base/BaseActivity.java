@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kevin.mellow.R;
+import com.kevin.mellow.dialog.BaseDialog;
 import com.kevin.mellow.dialog.CommonDialog;
 import com.kevin.mellow.dialog.DialogContract;
+import com.kevin.mellow.dialog.DialogManager;
 import com.kevin.mellow.utils.LogK;
 import com.kevin.mellow.utils.ToastUtils;
 
@@ -51,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     @BindView(R.id.tool_bar)
     public Toolbar toolBar;
     public ActionBar actionBar;
-
+    private BaseDialog mProgressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,11 +124,28 @@ public abstract class BaseActivity extends AppCompatActivity implements
     }
 
     public void showProgressDialog() {
-        printLogd("showProgressDialog");
+        showProgressDialog("");
+    }
+
+    public void showProgressDialog(String title) {
+        printLogd("showLoadingDialog");
+        if (mProgressDialog != mProgressDialog || isFinishing()) {
+            return;
+        }
+       mProgressDialog= DialogManager.createProgressDialog(title);
+        showFragmentDialog(mProgressDialog,"ProgressDialog");
     }
 
     public void dismissProgressDialog() {
-        printLogd("dismissProgressDialog");
+        printLogd("dismissLoadingDialog");
+        if (mProgressDialog != null && !isFinishing()) {
+            if (mProgressDialog.isAdded()) {
+                mProgressDialog.dismiss();
+            } else {
+                mProgressDialog.dismissAllowingStateLoss();
+            }
+            mProgressDialog = null;
+        }
     }
 
     //    @Override

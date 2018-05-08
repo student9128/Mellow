@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kevin.mellow.dialog.BaseDialog;
 import com.kevin.mellow.dialog.DialogContract;
 import com.kevin.mellow.dialog.DialogContract.DialogBtnClickListener;
+import com.kevin.mellow.dialog.DialogManager;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -26,6 +28,8 @@ public abstract class BaseFragment extends AppBaseFragment {
     public Unbinder unbinder;
     private boolean isViewCreated = false;
     private boolean isUIVisible = false;
+    private BaseDialog mProgressDialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -114,6 +118,7 @@ public abstract class BaseFragment extends AppBaseFragment {
         lazyLoad();
         printLogi("onViewCreated==========");
     }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -124,9 +129,10 @@ public abstract class BaseFragment extends AppBaseFragment {
             isUIVisible = false;
         }
     }
+
     private void lazyLoad() {
-        printLogd(isUIVisible+"============isUIVisible");
-        printLogd(isViewCreated+"------------isViewCreated");
+        printLogd(isUIVisible + "============isUIVisible");
+        printLogd(isViewCreated + "------------isViewCreated");
         if (isViewCreated && isUIVisible) {
 //            mPresenter.requestData();
             loadData();
@@ -149,6 +155,7 @@ public abstract class BaseFragment extends AppBaseFragment {
     public abstract void initListener();
 
     public abstract void loadData();
+
     /**
      * refresh user interface.
      */
@@ -161,16 +168,35 @@ public abstract class BaseFragment extends AppBaseFragment {
     }
 
 
-
-    public void showProgressDialog() {
-        printLogd("showProgressDialog");
+    public void showLoadingDialog() {
+        showLoadingDialog("");
     }
 
-    public void dismissProgressDialog() {
-        printLogd("dismissProgressDialog");
+    public void showLoadingDialog(String title) {
+        printLogd("showLoadingDialog");
+        if (mProgressDialog != null || mActivity.isFinishing()) {
+            return;
+        }
+        mProgressDialog = DialogManager.createProgressDialog(title);
+        mProgressDialog.show(getFragmentManager(), "ProgressDialog");
+//        showFragmentDialog(mProgressDialog,"ProgressDialog");
     }
 
-
+    public void dismissLoadingDialog() {
+        printLogd("dismissLoadingDialog");
+        if (mProgressDialog.isAdded()) {
+            mProgressDialog.dismiss();
+        }
+        mProgressDialog = null;
+//        if (mProgressDialog != null && !mActivity.isFinishing()) {
+//            if (mProgressDialog.isAdded()) {
+//                mProgressDialog.dismiss();
+//            } else {
+//                mProgressDialog.dismissAllowingStateLoss();
+//            }
+//            mProgressDialog = null;
+//        }
+    }
 
     //    @Override
     public void showAlertDialog(String title, String content, DialogBtnClickListener listener) {

@@ -75,6 +75,7 @@ public class DouBanPresenter implements DouBanContract.Presenter {
                     public void onComplete() {
                         super.onComplete();
                         view.refreshFinish();
+                        view.dismissProgressDialog();
                     }
                 });
 

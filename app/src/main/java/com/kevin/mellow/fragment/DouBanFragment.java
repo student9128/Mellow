@@ -106,6 +106,16 @@ public class DouBanFragment extends BaseFragment implements DouBanContract.View,
     }
 
     @Override
+    public void showProgressDialog() {
+        showLoadingDialog();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        dismissLoadingDialog();
+    }
+
+    @Override
     public void refreshFinish() {
         if (smartRefresh.isRefreshing()) {
             smartRefresh.finishRefresh();

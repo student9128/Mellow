@@ -115,12 +115,12 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
 
     @Override
     public void showProgress() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void dismissProgress() {
-
+        dismissLoadingDialog();
     }
 
     @Override

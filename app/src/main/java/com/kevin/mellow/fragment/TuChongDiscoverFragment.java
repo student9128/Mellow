@@ -168,7 +168,7 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
     @Override
     public void showHotEvent(List<TuChongDiscoverBean.HotEventsBean> d) {
         if (d.size() > 0) {
-        mHotEventAdapter.updateData(d);
+            mHotEventAdapter.updateData(d);
         }
     }
 
@@ -228,5 +228,15 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
         Intent intent = new Intent(mActivity, WebViewActivity.class);
         intent.putExtra("url", url);
         startActivity(intent);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        showLoadingDialog();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        dismissLoadingDialog();
     }
 }
