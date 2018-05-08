@@ -50,7 +50,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-//        baseView.dismissLoadingDialog();
+        baseView.dismissProgressDialog();
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
             baseView.showError(HttpStatusCode.getErrorDesResId(httpException.code()));
