@@ -174,6 +174,16 @@ public class DouBanMovieDetailActivity extends BaseActivity implements DouBanDet
     }
 
     @Override
+    public void showProgressDialog() {
+        showLoadingDialog();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        dismissLoadingDialog();
+    }
+
+    @Override
     public void showError(int resId) {
         showToast(getString(resId));
     }

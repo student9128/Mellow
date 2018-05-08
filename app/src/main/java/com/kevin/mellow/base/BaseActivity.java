@@ -54,6 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public Toolbar toolBar;
     public ActionBar actionBar;
     private BaseDialog mProgressDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,28 +124,28 @@ public abstract class BaseActivity extends AppCompatActivity implements
         return true;
     }
 
-    public void showProgressDialog() {
-        showProgressDialog("");
+    public void showLoadingDialog() {
+        showLoadingDialog("");
     }
 
-    public void showProgressDialog(String title) {
+    public void showLoadingDialog(String title) {
         printLogd("showLoadingDialog");
         if (mProgressDialog != mProgressDialog || isFinishing()) {
             return;
         }
-       mProgressDialog= DialogManager.createProgressDialog(title);
-        showFragmentDialog(mProgressDialog,"ProgressDialog");
+        if (mProgressDialog == null) {
+            mProgressDialog = DialogManager.createProgressDialog(title);
+            showFragmentDialog(mProgressDialog, "ProgressDialog");
+        }
+//        mProgressDialog.show(getSupportFragmentManager(),"");
     }
 
-    public void dismissProgressDialog() {
+    public void dismissLoadingDialog() {
         printLogd("dismissLoadingDialog");
         if (mProgressDialog != null && !isFinishing()) {
             if (mProgressDialog.isAdded()) {
                 mProgressDialog.dismiss();
-            } else {
-                mProgressDialog.dismissAllowingStateLoss();
             }
-            mProgressDialog = null;
         }
     }
 

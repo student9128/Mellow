@@ -177,17 +177,22 @@ public abstract class BaseFragment extends AppBaseFragment {
         if (mProgressDialog != null || mActivity.isFinishing()) {
             return;
         }
-        mProgressDialog = DialogManager.createProgressDialog(title);
-        mProgressDialog.show(getFragmentManager(), "ProgressDialog");
+        if (mProgressDialog == null) {
+            mProgressDialog = DialogManager.createProgressDialog(title);
+            mProgressDialog.show(getFragmentManager(), "ProgressDialog");
+        }
+
 //        showFragmentDialog(mProgressDialog,"ProgressDialog");
     }
 
     public void dismissLoadingDialog() {
         printLogd("dismissLoadingDialog");
-        if (mProgressDialog.isAdded()) {
-            mProgressDialog.dismiss();
+        if (mProgressDialog != null) {
+            if (mProgressDialog.isAdded()) {
+                mProgressDialog.dismiss();
+            }
+            mProgressDialog = null;
         }
-        mProgressDialog = null;
 //        if (mProgressDialog != null && !mActivity.isFinishing()) {
 //            if (mProgressDialog.isAdded()) {
 //                mProgressDialog.dismiss();
