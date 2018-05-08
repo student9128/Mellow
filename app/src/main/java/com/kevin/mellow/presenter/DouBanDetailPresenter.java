@@ -64,6 +64,7 @@ public class DouBanDetailPresenter implements DouBanDetailContract.Presenter {
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        view.dismissProgressDialog();
                     }
                 });
     }
@@ -99,6 +100,7 @@ public class DouBanDetailPresenter implements DouBanDetailContract.Presenter {
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        view.dismissProgressDialog();
                     }
                 });
     }
@@ -131,6 +133,7 @@ public class DouBanDetailPresenter implements DouBanDetailContract.Presenter {
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        view.dismissProgressDialog();
                     }
                 });
     }
