@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_dialog_loading_rectangle"
@@ -10,25 +11,34 @@
     android:paddingRight="@dimen/padding_30"
     android:paddingTop="@dimen/padding_30">
 
-    <ProgressBar
-        android:id="@+id/pb_progress_bar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+    <!--<ProgressBar-->
+        <!--android:id="@+id/pb_progress_bar"-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:indeterminateDrawable="@drawable/ic_progress_global"-->
+        <!--android:indeterminateTint="@color/colorPrimary"-->
+        <!--android:indeterminateTintMode="src_atop" />-->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_progress"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_vertical"
-        android:indeterminateDrawable="@drawable/ic_progress_global"
-        android:indeterminateTint="@color/colorPrimary"
-        android:indeterminateTintMode="src_atop" />
+        app:lottie_fileName="material_loading.json" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pb_progress_bar"
+        android:layout_below="@+id/lav_progress"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/margin_10"
         android:layout_marginTop="@dimen/uniform_margin"
+        android:layout_marginLeft="@dimen/margin_10"
         android:text="努力加载中..."
         android:textColor="@color/black" />
 </RelativeLayout>
