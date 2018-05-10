@@ -72,7 +72,9 @@ public class DateUtils {
             e.printStackTrace();
         }
         return time;
-    }    public static String dateFormat5(String str) {
+    }
+
+    public static String dateFormat5(String str) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;//解析字符串，转化为Date
         try {

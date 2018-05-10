@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
@@ -63,22 +64,29 @@ public class TuChongDiscoverHotEventAdapter extends RecyclerView
         String createdAt = hotEventsBean.getCreated_at();
         holder.tvCreateDate.setText("发起日期：" + DateUtils.dateFormat5(createdAt));
         String endAt = hotEventsBean.getEnd_at();
-        holder.tvEndDate.setText("截止日期：" + DateUtils.dateFormat5(endAt));
+        if (TextUtils.isEmpty(endAt)) {
+            holder.tvEndDate.setText("截止日期：无");
+        } else {
+
+            holder.tvEndDate.setText("截止日期：" + DateUtils.dateFormat5(endAt));
+        }
         int remainDays = new Double(hotEventsBean.getDueDays()).intValue();
         String s = String.valueOf(remainDays);
         int imageCount = new Double(hotEventsBean.getImage_count()).intValue();
         String s1 = String.valueOf(imageCount);
-        SpannableString remainStr = new SpannableString("距离截稿还有" + s + "天 共" + s1 + "件作品");
-        final int length = remainStr.length();
-        remainStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.colorPrimary)),
-                6, 6 + s.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        remainStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context,
-                R.color.colorPrimary)), length - 3 - s1.length(), length - 3, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        remainStr.setSpan(new AbsoluteSizeSpan(20, true), 6, 6 + s.length(),
-                Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        remainStr.setSpan(new AbsoluteSizeSpan(20, true), length - 3 - s1.length(), length - 3,
-                Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        holder.tvTip.setText(remainStr);
+        if (s != null && s1 != null) {
+            SpannableString remainStr = new SpannableString("距离截稿还有" + s + "天 共" + s1 + "件作品");
+            final int length = remainStr.length();
+            remainStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.colorPrimary)),
+                    6, 6 + s.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            remainStr.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context,
+                    R.color.colorPrimary)), length - 3 - s1.length(), length - 3, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            remainStr.setSpan(new AbsoluteSizeSpan(20, true), 6, 6 + s.length(),
+                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            remainStr.setSpan(new AbsoluteSizeSpan(20, true), length - 3 - s1.length(), length - 3,
+                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            holder.tvTip.setText(remainStr);
+        }
         String imageUrl = hotEventsBean.getImages().get(0);
         Glide.with(context)
                 .load(imageUrl)
