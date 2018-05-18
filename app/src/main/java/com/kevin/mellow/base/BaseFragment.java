@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,7 @@ public abstract class BaseFragment extends AppBaseFragment {
     private boolean isViewCreated = false;
     private boolean isUIVisible = false;
     private BaseDialog mProgressDialog;
-
+    private BaseDialog mFingerprintDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -202,7 +204,26 @@ public abstract class BaseFragment extends AppBaseFragment {
 //            mProgressDialog = null;
 //        }
     }
+    public void showFingerprintDialog() {
+        if (mFingerprintDialog != null || mActivity.isFinishing()) {
+            return;
+        }
+        mFingerprintDialog = DialogManager.createFingerprintDialog();
+        showFragmentDialog(mFingerprintDialog,"FingerprintDialog");
+    }
 
+    public void dismissFingerprintDialog() {
+        if (mFingerprintDialog != null && !mActivity.isFinishing()) {
+            if (mFingerprintDialog.isAdded()) {
+                mFingerprintDialog.dismiss();
+            }
+        }
+    }
+    public void showFragmentDialog(DialogFragment dialog, String tag) {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.add(dialog, tag);
+        ft.commitAllowingStateLoss();
+    }
     //    @Override
     public void showAlertDialog(String title, String content, DialogBtnClickListener listener) {
         DialogContract dialogContract = (DialogContract) mActivity;

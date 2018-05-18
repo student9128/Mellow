@@ -19,4 +19,6 @@
 
     <string name="action_open_in_browser">在浏览器中打开</string>
     <string name="action_copy_url">复制链接</string>
+
+    <string name="fingerprint_init_failed">指纹初始化失败，请求再次尝试！</string>
 </resources>

@@ -10,4 +10,8 @@ public class DialogManager {
     public static BaseDialog createProgressDialog(String title) {
         return CommonLoadingDialog.newInstance(title);
     }
+
+    public static BaseDialog createFingerprintDialog() {
+        return FingerprintDialog.newInstance();
+    }
 }

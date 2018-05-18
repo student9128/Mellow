@@ -52,7 +52,7 @@
 
     <string name="fingerprint_description">Confirm your fingerprint.</string>
     <string name="fingerprint_hint">Touch sensor</string>
-
+    <string name="fingerprint_init_failed">Fingerprint init failed! Try again!</string>
     <!-- Button text -->
     <string name="start_btn">Start</string>
     <string name="cancel_btn">Cancel</string>
@@ -96,6 +96,7 @@
         This is intended to prevent programs from waiting for the fingerprint sensor indefinitely.
         The timeout is platform and sensor-specific, but is generally about 30 seconds.</string>
     <string name="ErrorUnableToProcess_warning">Error state returned when the sensor was unable to process the current image.</string>
+
 
 
 </resources>
