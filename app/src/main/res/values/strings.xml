@@ -6,6 +6,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="exit_app_tip">Click again to exit Mellow</string>
+
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -28,6 +30,7 @@
 
     <string name="one_home">Home</string>
     <string name="one_chinese_week">Week</string>
+    <string name="login_success_tip">Login Success</string>
 
     <string name="http_error_unauthorized">Unauthorized</string>
     <string name="http_error_forbidden">Request Forbidden</string>

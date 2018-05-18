@@ -1,4 +1,4 @@
-package com.kevin.mellow.fiingerprint;
+package com.kevin.mellow.fingerprint;
 
 import android.annotation.TargetApi;
 import android.os.Build;

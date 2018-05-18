@@ -1,6 +1,16 @@
 package com.kevin.mellow.base;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -9,9 +19,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Display;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroupOverlay;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kevin.mellow.R;
@@ -19,6 +38,8 @@ import com.kevin.mellow.dialog.BaseDialog;
 import com.kevin.mellow.dialog.CommonDialog;
 import com.kevin.mellow.dialog.DialogContract;
 import com.kevin.mellow.dialog.DialogManager;
+import com.kevin.mellow.receiver.KeyReceiver;
+import com.kevin.mellow.utils.FastBlur;
 import com.kevin.mellow.utils.LogK;
 import com.kevin.mellow.utils.ToastUtils;
 
@@ -54,10 +75,13 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public Toolbar toolBar;
     public ActionBar actionBar;
     private BaseDialog mProgressDialog;
+    private BaseDialog mFingerprintDialog;
+    private KeyReceiver keyReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(setLayoutResId());
         ButterKnife.bind(this);
         setSupportActionBar(toolBar);
@@ -67,9 +91,17 @@ public abstract class BaseActivity extends AppCompatActivity implements
         initView();
 //        initData();
 //        initListener();
+//        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+//        keyReceiver = new KeyReceiver();
+//        registerReceiver(keyReceiver, intentFilter);
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        unregisterReceiver(keyReceiver);
+    }
 
     public abstract int setLayoutResId();
 
@@ -130,7 +162,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     public void showLoadingDialog(String title) {
         printLogd("showLoadingDialog");
-        if (mProgressDialog != mProgressDialog || isFinishing()) {
+        if (mProgressDialog != null || isFinishing()) {
             return;
         }
         if (mProgressDialog == null) {
@@ -145,6 +177,22 @@ public abstract class BaseActivity extends AppCompatActivity implements
         if (mProgressDialog != null && !isFinishing()) {
             if (mProgressDialog.isAdded()) {
                 mProgressDialog.dismiss();
+            }
+        }
+    }
+
+    public void showFingerprintDialog() {
+        if (mFingerprintDialog != null || isFinishing()) {
+            return;
+        }
+        mFingerprintDialog = DialogManager.createFingerprintDialog();
+        showFragmentDialog(mFingerprintDialog, "FingerprintDialog");
+    }
+
+    public void dismissFingerprintDialog() {
+        if (mFingerprintDialog != null && !isFinishing()) {
+            if (mFingerprintDialog.isAdded()) {
+                mFingerprintDialog.dismiss();
             }
         }
     }
@@ -205,5 +253,15 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public void printLogw(String str) {
         LogK.w(TAG, str);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+
+
+    }
+
+
 
 }

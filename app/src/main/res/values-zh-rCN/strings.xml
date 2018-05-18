@@ -20,5 +20,7 @@
     <string name="action_open_in_browser">在浏览器中打开</string>
     <string name="action_copy_url">复制链接</string>
 
+    <string name="login_success_tip">登录成功</string>
     <string name="fingerprint_init_failed">指纹初始化失败，请求再次尝试！</string>
+    <string name="exit_app_tip">再点一次退出Mellow</string>
 </resources>

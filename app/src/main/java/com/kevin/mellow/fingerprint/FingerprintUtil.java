@@ -1,4 +1,4 @@
-package com.kevin.mellow.fiingerprint;
+package com.kevin.mellow.fingerprint;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.kevin.mellow.R;
-import com.kevin.mellow.dialog.FingerprintDialog;
 import com.kevin.mellow.utils.ToastUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -55,7 +54,6 @@ public class FingerprintUtil {
                 switch (msg.what) {
                     case MSG_AUTH_SUCCESS:
                         getFingerprintInfo();
-                        ToastUtils.showToast(mContext,"成功");
                         if (listener != null) {
                             listener.onAuthSuccess();
                         }
@@ -65,7 +63,7 @@ public class FingerprintUtil {
                         cancellationSignal = null;
                         break;
                     case MSG_AUTH_ERROR:
-                        handleErrorCode(msg.arg1);
+//                        handleErrorCode(msg.arg1);
                         break;
                     case MSG_AUTH_HELP:
                         handleHelpCode(msg.arg1);
@@ -81,6 +79,9 @@ public class FingerprintUtil {
             //没有支持指纹的硬件
         } else if (!fingerprintManagerCompat.hasEnrolledFingerprints()) {
             //没有录入指纹
+//            myAuthCallback = new MyAuthCallback(mHandler);
+//            showFingerprintDialog();
+//            verifyFingerprint();
         } else {
             try {
                 myAuthCallback = new MyAuthCallback(mHandler);
@@ -138,6 +139,10 @@ public class FingerprintUtil {
             cancellationSignal.cancel();
             cancellationSignal = null;
         }
+    }
+
+    public void nullCancellationSignal() {
+        cancellationSignal = null;
     }
 
     public void getFingerprintInfo() {
@@ -235,13 +240,13 @@ public class FingerprintUtil {
         listener = l;
     }
 
-    private FingerprintDialog.OnAuthCancelListener l;
+    private OnAuthCancelListener l;
 
     public interface OnAuthCancelListener {
         void onAuthCancel();
     }
 
-    public void setOnAuthCancelListener(FingerprintDialog.OnAuthCancelListener l) {
+    public void setOnAuthCancelListener(OnAuthCancelListener l) {
         this.l = l;
     }
 

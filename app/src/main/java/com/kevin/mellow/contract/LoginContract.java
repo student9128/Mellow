@@ -15,6 +15,8 @@ public class LoginContract {
     public interface View extends LoanBaseView<Presenter> {
         void showTips(String msg);
 
+        void showTips(int strId);
+
         void finishAct();
     }
 

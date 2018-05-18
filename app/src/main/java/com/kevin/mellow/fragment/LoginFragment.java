@@ -1,19 +1,9 @@
 package com.kevin.mellow.fragment;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
-import android.support.v4.os.CancellationSignal;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,21 +17,10 @@ import com.kevin.mellow.R;
 import com.kevin.mellow.base.BaseFragment;
 import com.kevin.mellow.contract.LoginContract;
 import com.kevin.mellow.dialog.FingerprintDialog;
-import com.kevin.mellow.fiingerprint.CryptoObjectHelper;
-import com.kevin.mellow.fiingerprint.FingerprintUtil;
-import com.kevin.mellow.fiingerprint.MyAuthCallback;
+import com.kevin.mellow.fingerprint.FingerprintUtil;
 import com.kevin.mellow.presenter.LoginPresenter;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
-
 import butterknife.BindView;
-
-import static com.kevin.mellow.constant.Constants.MSG_AUTH_ERROR;
-import static com.kevin.mellow.constant.Constants.MSG_AUTH_FAILED;
-import static com.kevin.mellow.constant.Constants.MSG_AUTH_HELP;
-import static com.kevin.mellow.constant.Constants.MSG_AUTH_SUCCESS;
 
 /**
  * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> on 2017/12/22.
@@ -51,7 +30,7 @@ import static com.kevin.mellow.constant.Constants.MSG_AUTH_SUCCESS;
  */
 
 
-public class LoginFragment extends BaseFragment implements LoginContract.View, View.OnClickListener, FingerprintUtil.OnAuthFingerprintListener, FingerprintDialog.OnAuthCancelListener {
+public class LoginFragment extends BaseFragment implements LoginContract.View, View.OnClickListener, FingerprintUtil.OnAuthFingerprintListener, FingerprintUtil.OnAuthCancelListener {
     @BindView(R.id.tv_username)
     ImageView tvUsername;
     @BindView(R.id.et_username)
@@ -70,6 +49,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     TextView tvForgotPassword;
     @BindView(R.id.tv_register)
     TextView tvRegister;
+    @BindView(R.id.iv_logo)
+    ImageView ivLogo;
     private LoginContract.Presenter mPresenter;
     private FingerprintUtil fingerprintUtil;
     private FingerprintDialog fingerprintDialog;
@@ -97,6 +78,12 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
         fingerprintUtil.initFingerprint();
         fingerprintDialog = FingerprintDialog.newInstance();
         }
+//        Bitmap bitmap = ((BitmapDrawable) ivLogo.getDrawable()).getBitmap();
+//        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 8,
+//                bitmap.getHeight() / 8, false);
+//        Bitmap bitmap1 = FastBlur.doBlur(scaledBitmap, 10, true);
+//        ivLogo.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//        ivLogo.setImageBitmap(bitmap1);
     }
 
 
@@ -109,7 +96,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
         btnLogin.setOnClickListener(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         fingerprintUtil.setOnAuthSuccessListener(this);
-        fingerprintDialog.setOnAuthCancelListener(this);
+        fingerprintUtil.setOnAuthCancelListener(this);
         }
     }
 
@@ -144,6 +131,11 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     }
 
     @Override
+    public void showTips(int strId) {
+        showToast(getString(strId));
+    }
+
+    @Override
     public void finishAct() {
         startActivity(new Intent(mActivity, MainActivity.class));
         mActivity.finish();
@@ -170,8 +162,9 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
 
     @Override
     public void onAuthSuccess() {
-        fingerprintUtil.dismissFingerprintDialog();
+//        fingerprintUtil.dismissFingerprintDialog();
         finishAct();
+        fingerprintUtil.nullCancellationSignal();
     }
 
     @Override

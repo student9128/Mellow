@@ -1,4 +1,4 @@
-package com.kevin.mellow.fiingerprint;
+package com.kevin.mellow.fingerprint;
 
 import android.os.Handler;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;

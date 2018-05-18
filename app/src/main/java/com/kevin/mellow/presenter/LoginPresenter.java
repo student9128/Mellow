@@ -1,5 +1,6 @@
 package com.kevin.mellow.presenter;
 
+import com.kevin.mellow.R;
 import com.kevin.mellow.contract.LoginContract;
 import com.kevin.mellow.data.source.LoanDataSource;
 
@@ -33,7 +34,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 //            view.showTips("密码不能为空");
 //        } else {
             loanDataSource.login(account, password);
-            view.showTips("Login succeed");
+            view.showTips(R.string.login_success_tip);
             view.finishAct();
 //        }
     }

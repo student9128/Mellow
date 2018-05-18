@@ -18,6 +18,7 @@
         <!--android:textColor="@color/white"-->
         <!--android:textSize="@dimen/textSize36" />-->
         <ImageView
+            android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"

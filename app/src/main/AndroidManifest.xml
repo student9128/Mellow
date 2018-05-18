@@ -39,6 +39,7 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.DouBanMovieDetailActivity" />
         <activity android:name=".activity.WebViewActivity"/>
+        <receiver android:name=".receiver.KeyReceiver"/>
     </application>
 
 </manifest>

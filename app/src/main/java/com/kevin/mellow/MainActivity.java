@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -261,5 +262,23 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             }
             mTempFragment = fragment;
         }
+    }
+    private long lastTime = 0;
+    /**
+     * 菜单、返回键响应,双击退出函数
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - lastTime) > 2000) {
+                showToast(getString(R.string.exit_app_tip));
+                lastTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

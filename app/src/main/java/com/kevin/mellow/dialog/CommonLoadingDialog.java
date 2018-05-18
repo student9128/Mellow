@@ -35,6 +35,7 @@ public class CommonLoadingDialog extends BaseDialog {
         return dialog;
     }
 
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class CommonLoadingDialog extends BaseDialog {
         //        //添加这两行代码去除系统自带的边框
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        getDialog().getWindow().setDimAmount(0.3f);
         String title = getArguments().getString(DIALOG_TITLE);
         TextView tvTitle = view.findViewById(R.id.tv_title);
         if (!TextUtils.isEmpty(title)) {

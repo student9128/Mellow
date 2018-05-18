@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.kevin.mellow.dialog.BaseDialog;
 import com.kevin.mellow.dialog.DialogContract;
@@ -32,6 +33,7 @@ public abstract class BaseFragment extends AppBaseFragment {
     private boolean isUIVisible = false;
     private BaseDialog mProgressDialog;
     private BaseDialog mFingerprintDialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -204,12 +206,13 @@ public abstract class BaseFragment extends AppBaseFragment {
 //            mProgressDialog = null;
 //        }
     }
+
     public void showFingerprintDialog() {
         if (mFingerprintDialog != null || mActivity.isFinishing()) {
             return;
         }
         mFingerprintDialog = DialogManager.createFingerprintDialog();
-        showFragmentDialog(mFingerprintDialog,"FingerprintDialog");
+        showFragmentDialog(mFingerprintDialog, "FingerprintDialog");
     }
 
     public void dismissFingerprintDialog() {
@@ -219,11 +222,13 @@ public abstract class BaseFragment extends AppBaseFragment {
             }
         }
     }
+
     public void showFragmentDialog(DialogFragment dialog, String tag) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(dialog, tag);
         ft.commitAllowingStateLoss();
     }
+
     //    @Override
     public void showAlertDialog(String title, String content, DialogBtnClickListener listener) {
         DialogContract dialogContract = (DialogContract) mActivity;
@@ -269,4 +274,5 @@ public abstract class BaseFragment extends AppBaseFragment {
             dialogContract.showNormalDialog(title, content, negativeBtn, positiveBtn, listener);
         }
     }
+
 }
