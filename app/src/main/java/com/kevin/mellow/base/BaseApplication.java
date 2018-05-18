@@ -4,9 +4,14 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.app.KeyguardManager;
+import android.app.Service;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.text.TextUtils;
+
+import com.baidu.mapapi.SDKInitializer;
+import com.kevin.mellow.service.LocationService;
 
 import java.util.List;
 
@@ -21,16 +26,24 @@ import java.util.List;
 public class BaseApplication extends Application {
     private static Context mContext;
     private static int activityCount = 0;
+    public static LocationService mLocationService;
+    private Vibrator mVibrator;
 
     public static Context getContext() {
         return mContext;
     }
 
+    public static LocationService getLocationService() {
+        return mLocationService;
+    }
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
         initLifecycle();
+        mVibrator = (Vibrator) mContext.getSystemService(Service.VIBRATOR_SERVICE);
+        SDKInitializer.initialize(getApplicationContext());//百度地图初始化
+        mLocationService = LocationService.getInstance(getApplicationContext());
     }
 
     private void initLifecycle() {
@@ -79,7 +92,6 @@ public class BaseApplication extends Application {
             return false;
         }
     }
-
 
 
 }

@@ -5,10 +5,16 @@ import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.Poi;
+import com.kevin.mellow.base.BaseApplication;
+import com.kevin.mellow.service.LocationService;
 import com.kevin.mellow.utils.ActivityUtils;
 import com.kevin.mellow.R;
 import com.kevin.mellow.base.BaseActivity;
 import com.kevin.mellow.fragment.LoginFragment;
+import com.kevin.mellow.utils.LogK;
 
 /**
  * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> on 2017/12/22.

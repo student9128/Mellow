@@ -55,7 +55,7 @@ import butterknife.ButterKnife;
  * </div>
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements
+public abstract class BaseActivity extends AppBaseActivity implements
         ActivityCompat.OnRequestPermissionsResultCallback {
     /**
      * Tag,can be used for log or toast.
@@ -112,33 +112,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
 //    public abstract void initListener();
     //===============Some Methods=================//
 
-    //    /**
-//     * init Loading Dialog.
-//     */
-//    public void initLoadingDialog() {
-//        mLoadingDialog = new LoadingDialog();
-//    }
-//
-//    /**
-//     * show Loading Dialog.
-//     */
-//    public void showLoadingDialog() {
-//        mLoadingDialog.show(getSupportFragmentManager(), TAG);
-//    }
-//
-//    /**
-//     * dismiss Loading Dialog.
-//     */
-//    public void dismissLoadingDialog() {
-//        if (mLoadingDialog.isAdded()) {
-//            mLoadingDialog.dismiss();
-//        }
-//    }
-//}
-//    }
-    public void showToast(String message) {
-        ToastUtils.showToast(this, message);
-    }
 
     public void startNewActivity(Class<? extends BaseActivity> clazz) {
         startActivity(new Intent(this, clazz));
@@ -222,10 +195,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
                 positiveButton), "NormalDialog");
     }
 
-    @Nullable
-    private String getStringById(int resId) {
-        return resId == View.NO_ID || resId == 0 ? null : getString(resId);
-    }
+
 
     public void showFragmentDialog(DialogFragment dialog, String tag) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -233,34 +203,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
         ft.commitAllowingStateLoss();
     }
 
-
-    public void printLoge(String str) {
-        LogK.e(TAG, str);
-    }
-
-    public void printLogd(String str) {
-        LogK.d(TAG, str);
-    }
-
-    public void printLogi(String str) {
-        LogK.i(TAG, str);
-    }
-
-    public void printLogv(String str) {
-        LogK.v(TAG, str);
-    }
-
-    public void printLogw(String str) {
-        LogK.w(TAG, str);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-
-
-    }
 
 
 

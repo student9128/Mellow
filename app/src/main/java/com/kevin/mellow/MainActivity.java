@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,11 +16,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.kevin.mellow.base.BaseActivity;
+import com.kevin.mellow.base.BaseApplication;
+import com.kevin.mellow.constant.Constants;
 import com.kevin.mellow.fragment.CenterWeatherFragment;
 import com.kevin.mellow.fragment.DouBanFragment;
 import com.kevin.mellow.fragment.LiVideoFragment;
 import com.kevin.mellow.fragment.TuChongFragment;
 import com.kevin.mellow.fragment.SettingsFragment;
+import com.kevin.mellow.listener.LocationListener;
+import com.kevin.mellow.service.LocationService;
 import com.kevin.mellow.utils.DisplayUtils;
 
 import java.lang.reflect.Field;
@@ -76,6 +81,30 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 //        View headerView = navView.getHeaderView(0);
 //        navView.setNavigationItemSelectedListener(this);
 //    }
+
+    private LocationService mLocationService;
+    private LocationListener mListener;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mLocationService = BaseApplication.getLocationService();
+        mListener = new LocationListener(getApplicationContext());
+        mLocationService.registerListener(mListener);
+        mLocationService.setLocationOption(mLocationService.getDefaultLocationClientOption());
+        mLocationService.start();
+        String locationCity = getStringSp(Constants.LOCATION_CITY);
+        tvTitle.setText(locationCity);
+        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP,14f);
+        tvTitle.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onStop() {
+        mLocationService.unregisterListener(mListener);//注销监听
+        mLocationService.stop();//停止定位服务
+        super.onStop();
+    }
 
     @Override
     public int setLayoutResId() {
@@ -211,12 +240,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                     douBanFragment = DouBanFragment.newInstance(getString(R.string.dou_ban));
                 }
                 switchFragment(douBanFragment);
+                tvTitle.setVisibility(View.VISIBLE);
                 actionBar.setTitle(getString(R.string.dou_ban));
                 break;
             case R.id.nav_one_article:
                 if (oneArticleFragment == null) {
                     oneArticleFragment = TuChongFragment.newInstance(getString(R.string.tu_chong));
                 }
+                tvTitle.setVisibility(View.GONE);
                 switchFragment(oneArticleFragment);
                 actionBar.setTitle(getString(R.string.tu_chong));
                 break;
@@ -224,6 +255,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 if (centerWeatherFragment == null) {
                     centerWeatherFragment = CenterWeatherFragment.newInstance(getString(R.string.center_weather));
                 }
+                tvTitle.setVisibility(View.GONE);
                 switchFragment(centerWeatherFragment);
                 actionBar.setTitle(getString(R.string.center_weather));
                 break;
@@ -231,6 +263,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 if (liVideoFragment == null) {
                     liVideoFragment = LiVideoFragment.newInstance(getString(R.string.li_video));
                 }
+                tvTitle.setVisibility(View.GONE);
                 switchFragment(liVideoFragment);
                 actionBar.setTitle(getString(R.string.li_video));
                 break;
@@ -238,6 +271,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 if (settingsFragment == null) {
                     settingsFragment = SettingsFragment.newInstance(getString(R.string.settings));
                 }
+                tvTitle.setVisibility(View.GONE);
                 switchFragment(settingsFragment);
                 actionBar.setTitle(getString(R.string.settings));
                 break;
@@ -263,7 +297,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             mTempFragment = fragment;
         }
     }
+
     private long lastTime = 0;
+
     /**
      * 菜单、返回键响应,双击退出函数
      */

@@ -21,4 +21,16 @@ public class Constants {
     public static final int MSG_AUTH_FAILED = 101;
     public static final int MSG_AUTH_ERROR = 102;
     public static final int MSG_AUTH_HELP = 103;
+
+    public static final String TIP_NETWORK_TIPS = "请先连接网络";
+
+    //location information key
+    /**
+     * 市
+     */
+    public static final String LOCATION_CITY = "city";
+    /**
+     * 区
+     */
+    public static final String LOCATION_DISTRICT = "district";
 }
