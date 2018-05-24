@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+        <com.kevin.mellow.view.IndexBar
+            android:id="@+id/ib_index_bar"
+            android:layout_width="@dimen/width_30"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            app:indexTextSize="@dimen/textSize12"
+            android:paddingHorizontal="@dimen/padding_10"
+            app:indexSelectedTextColor="@color/colorPrimary"
+            app:indexTextColor="@color/gray"
+            android:layout_marginBottom="@dimen/padding_20"
+            android:layout_marginTop="@dimen/padding_20" />
+
+        <TextView
+            android:id="@+id/tv_overlay"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_overlay"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize24"
+            android:padding="@dimen/uniform_padding" />
+    </RelativeLayout>
+</RelativeLayout>

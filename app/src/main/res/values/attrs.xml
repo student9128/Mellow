@@ -18,4 +18,17 @@
         <attr name="lineColor" format="color" />
         <attr name="animationDuration" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="IndexBar">
+        <attr name="indexTextSize" format="dimension"/>
+        <attr name="indexTextColor" format="color"/>
+        <attr name="indexSelectedTextColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SectionItemDecoration">
+        <attr name="sectionColor" format="color"/>
+        <attr name="sectionHeight" format="dimension|reference"/>
+        <attr name="sectionTextColor" format="color"/>
+        <attr name="sectionTextSize" format="dimension|reference"/>
+    </declare-styleable>
 </resources>

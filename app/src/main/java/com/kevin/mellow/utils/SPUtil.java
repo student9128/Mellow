@@ -30,7 +30,7 @@ public class SPUtil {
     public static Boolean getBooleanSP(String key, Context context) {
         mSP = context.getSharedPreferences(key, Context.MODE_PRIVATE);
         boolean value = mSP.getBoolean(key, false);
-        LogK.d("Jingpeng", value + "");
+        LogK.d("Kevin", value + "");
         return value;
 
     }
@@ -45,7 +45,7 @@ public class SPUtil {
     public static Boolean getBooleanSPDefaultTrue(String key, Context context) {
         mSP = context.getSharedPreferences(key, Context.MODE_PRIVATE);
         boolean value = mSP.getBoolean(key, true);
-        LogK.d("Jingpeng", value + "");
+        LogK.d("Kevin", value + "");
         return value;
 
     }

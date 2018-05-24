@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.kevin.mellow.R;
@@ -52,6 +53,7 @@ public class DouBanFragment extends BaseFragment implements DouBanContract.View,
     private int pageNum = 0;
     private DouBanMovieAdapter mAdapter;
     private List<DouBanMovieBean.SubjectsBean> data = new ArrayList<>();
+    private String cityName;
 
     public static DouBanFragment newInstance(String s) {
         DouBanFragment fragment = new DouBanFragment();
@@ -80,10 +82,18 @@ public class DouBanFragment extends BaseFragment implements DouBanContract.View,
         rvRecyclerView.addItemDecoration(dividerItemDecoration);
         mAdapter = new DouBanMovieAdapter(mActivity, data);
         rvRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
     public void initData() {
+        Bundle bundle = new Bundle();
+        String string = bundle.getString(Constants.ARGS);
+        if (!TextUtils.isEmpty(string)) {
+            cityName = string;
+        } else {
+            cityName = "北京";
+        }
     }
 
     @Override
@@ -95,7 +105,7 @@ public class DouBanFragment extends BaseFragment implements DouBanContract.View,
 
     @Override
     public void loadData() {
-        mPresenter.requestData("上海", String.valueOf(pageNum), Constants.TYPE_REFRESH);
+        mPresenter.requestData(cityName, String.valueOf(pageNum), Constants.TYPE_REFRESH);
 
     }
 
@@ -144,13 +154,13 @@ public class DouBanFragment extends BaseFragment implements DouBanContract.View,
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
-        mPresenter.requestData("上海", "0", Constants.TYPE_REFRESH);
+        mPresenter.requestData(cityName, "0", Constants.TYPE_REFRESH);
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
         pageNum++;
-        mPresenter.requestData("上海", String.valueOf(pageNum), Constants.TYPE_LOAD_MORE);
+        mPresenter.requestData(cityName, String.valueOf(pageNum), Constants.TYPE_LOAD_MORE);
     }
 
     @Override

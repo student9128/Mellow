@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/uniform_margin">
+
+    <TextView
+        android:id="@+id/tv_location_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSize15"
+        android:background="@drawable/bg_location_item"
+        android:padding="@dimen/padding_10" />
+</LinearLayout>

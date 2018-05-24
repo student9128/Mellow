@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 
 def keystoreFilepath = ''
 def RELEASE_KEY_PASSWORD = ''
@@ -48,6 +48,11 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+    greendao{
+        schemaVersion 1
+        daoPackage 'com.kevin.mellow.database'
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
@@ -90,4 +95,8 @@ dependencies {
         transitive = true
     }
     implementation 'com.airbnb.android:lottie:2.5.4'
+
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB
+    implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
 }

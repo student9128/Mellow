@@ -1,6 +1,7 @@
 package com.kevin.mellow.utils;
 
 import android.content.Context;
+import android.util.TypedValue;
 
 /**
  * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> for Project KevinSummary on 2017/9/12.
@@ -57,6 +58,20 @@ public class DisplayUtils {
     public static int sp2px(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
+    }
+
+    /**
+     * convert dp to its equivalent px
+     */
+    public static int dpTpx(Context context,int dp){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,context.getResources().getDisplayMetrics());
+    }
+
+    /**
+     * convert sp to its equivalent px
+     */
+    public static int spTpx(Context context,int sp){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp,context.getResources().getDisplayMetrics());
     }
 
 }

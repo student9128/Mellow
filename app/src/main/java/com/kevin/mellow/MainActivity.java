@@ -1,5 +1,6 @@
 package com.kevin.mellow;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -15,6 +17,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.kevin.mellow.activity.LocationActivity;
+import com.kevin.mellow.adapter.LocationAdapter;
 import com.kevin.mellow.base.BaseActivity;
 import com.kevin.mellow.base.BaseApplication;
 import com.kevin.mellow.constant.Constants;
@@ -31,7 +35,8 @@ import java.lang.reflect.Field;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
+        NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @BindView(R.id.fl_content)
     FrameLayout flContent;
@@ -94,9 +99,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mLocationService.setLocationOption(mLocationService.getDefaultLocationClientOption());
         mLocationService.start();
         String locationCity = getStringSp(Constants.LOCATION_CITY);
-        tvTitle.setText(locationCity);
-        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP,14f);
-        tvTitle.setVisibility(View.VISIBLE);
+        if (!TextUtils.isEmpty(locationCity)) {
+            tvTitle.setText(locationCity);
+            tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18f);
+            tvTitle.setVisibility(View.VISIBLE);
+            ivArrowDown.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -137,7 +145,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         actionBar.setTitle(getString(R.string.dou_ban));//默认是oneFragment
         douBanFragment = DouBanFragment.newInstance(getString(R.string.dou_ban));
         mTempFragment = douBanFragment;
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_content, douBanFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_content, douBanFragment)
+                .commit();
+
+        llTitle.setOnClickListener(this);
     }
 
     /**
@@ -181,8 +192,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             e.printStackTrace();
         }
         try {
-            mEdgeSize.setInt(draggerObj, DisplayUtils.dip2px(this, 50)); //optimal value as for me, you may set any constant in dp
-            //You can set it even to the value you want like mEdgeSize.setInt(draggerObj, 150); for 150dp
+            mEdgeSize.setInt(draggerObj, DisplayUtils.dip2px(this, 50)); //optimal value as for
+            // me, you may set any constant in dp
+            //You can set it even to the value you want like mEdgeSize.setInt(draggerObj, 150);
+            // for 150dp
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -204,7 +217,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
      */
     private void hideNavigationViewScrollbar(NavigationView navigationView) {
         if (navigationView != null) {
-            NavigationMenuView navigationMenuView = (NavigationMenuView) navigationView.getChildAt(0);
+            NavigationMenuView navigationMenuView = (NavigationMenuView) navigationView
+                    .getChildAt(0);
             if (navigationMenuView != null) {
                 navigationMenuView.setVerticalScrollBarEnabled(false);
             }
@@ -237,10 +251,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         switch (item.getItemId()) {
             case R.id.nav_dou_ban:
                 if (douBanFragment == null) {
-                    douBanFragment = DouBanFragment.newInstance(getString(R.string.dou_ban));
+                    douBanFragment = DouBanFragment.newInstance(tvTitle.getText().toString());
                 }
                 switchFragment(douBanFragment);
                 tvTitle.setVisibility(View.VISIBLE);
+                ivArrowDown.setVisibility(View.VISIBLE);
                 actionBar.setTitle(getString(R.string.dou_ban));
                 break;
             case R.id.nav_one_article:
@@ -248,14 +263,17 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                     oneArticleFragment = TuChongFragment.newInstance(getString(R.string.tu_chong));
                 }
                 tvTitle.setVisibility(View.GONE);
+                ivArrowDown.setVisibility(View.GONE);
                 switchFragment(oneArticleFragment);
                 actionBar.setTitle(getString(R.string.tu_chong));
                 break;
             case R.id.nav_center_weather:
                 if (centerWeatherFragment == null) {
-                    centerWeatherFragment = CenterWeatherFragment.newInstance(getString(R.string.center_weather));
+                    centerWeatherFragment = CenterWeatherFragment.newInstance(getString(R.string
+                            .center_weather));
                 }
                 tvTitle.setVisibility(View.GONE);
+                ivArrowDown.setVisibility(View.GONE);
                 switchFragment(centerWeatherFragment);
                 actionBar.setTitle(getString(R.string.center_weather));
                 break;
@@ -264,6 +282,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                     liVideoFragment = LiVideoFragment.newInstance(getString(R.string.li_video));
                 }
                 tvTitle.setVisibility(View.GONE);
+                ivArrowDown.setVisibility(View.GONE);
                 switchFragment(liVideoFragment);
                 actionBar.setTitle(getString(R.string.li_video));
                 break;
@@ -272,6 +291,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                     settingsFragment = SettingsFragment.newInstance(getString(R.string.settings));
                 }
                 tvTitle.setVisibility(View.GONE);
+                ivArrowDown.setVisibility(View.GONE);
                 switchFragment(settingsFragment);
                 actionBar.setTitle(getString(R.string.settings));
                 break;
@@ -316,5 +336,30 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_title:
+                startActivityForResult(new Intent(this, LocationActivity.class), 0);
+                break;
+        }
+    }
+
+    /**
+     * 该方法在onStart之前执行，因此将获取的值存储起来
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RESULT_OK == resultCode) {
+            String city = data.getStringExtra(Constants.LOCATION_CITY);
+//            tvTitle.setText(city);
+            setSp(Constants.LOCATION_CITY, city);
+        }
     }
 }

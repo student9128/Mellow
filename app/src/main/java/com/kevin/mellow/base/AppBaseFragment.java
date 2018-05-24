@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.kevin.mellow.utils.LogK;
 import com.kevin.mellow.utils.NetUtils;
+import com.kevin.mellow.utils.SPUtil;
 import com.kevin.mellow.utils.ToastUtils;
 
 /**
@@ -52,6 +53,34 @@ public class AppBaseFragment extends Fragment {
      */
     public int getMyColor(int color) {
         return ContextCompat.getColor(mActivity, color);
+    }
+
+    /**
+     * store value in SharePreferences.
+     *
+     * @param key key
+     * @param str value
+     */
+    public void setSp(String key, String str) {
+        SPUtil.setSP(key, mActivity, str);
+    }
+
+    public void setSp(String key, boolean b) {
+        SPUtil.setSP(key, mActivity, b);
+    }
+
+    /**
+     * get SharePreferences value.
+     *
+     * @param key key
+     * @return value
+     */
+    public String getStringSp(String key) {
+        return SPUtil.getStringSP(key, mActivity);
+    }
+
+    public Boolean getBooleanSp(String key) {
+        return SPUtil.getBooleanSP(key, mActivity);
     }
 
 //===============Tools=================//

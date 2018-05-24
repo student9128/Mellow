@@ -71,8 +71,13 @@ public abstract class BaseActivity extends AppBaseActivity implements
     public TextView tvTitle;
     @BindView(R.id.iv_function)
     public ImageView ivFunction;
+    @BindView(R.id.ll_title)
+    public LinearLayout llTitle;
+    @BindView(R.id.iv_arrow_down)
+    public ImageView ivArrowDown;
     @BindView(R.id.tool_bar)
     public Toolbar toolBar;
+
     public ActionBar actionBar;
     private BaseDialog mProgressDialog;
     private BaseDialog mFingerprintDialog;

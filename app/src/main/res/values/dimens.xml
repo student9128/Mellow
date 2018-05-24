@@ -26,6 +26,7 @@
     <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_20">20dp</dimen>
     <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_35">35dp</dimen>
     <dimen name="margin_40">40dp</dimen>
     <dimen name="margin_50">50dp</dimen>
 
@@ -36,6 +37,10 @@
     <dimen name="width_3">3dp</dimen>
     <dimen name="width_4">4dp</dimen>
     <dimen name="width_5">5dp</dimen>
+    <dimen name="width_10">10dp</dimen>
+    <dimen name="width_15">15dp</dimen>
+    <dimen name="width_20">20dp</dimen>
+    <dimen name="width_30">30dp</dimen>
 
     <!-- padding value -->
     <dimen name="padding_10">10dp</dimen>

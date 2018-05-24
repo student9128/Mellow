@@ -126,7 +126,7 @@ public class RequestDataSource implements RemoteDataSource {
     public Observable<DouBanMovieBean> requestDouBan(String cityName, String start) {
         Map<String, String> map = new HashMap<>();
         map.put("apikey", "0b2bdeda43b5688921839c8ecb20399b");
-        map.put("city", "上海");
+        map.put("city", cityName);
         map.put("start", start);
         map.put("count", "10");
         map.put("client", "");
@@ -138,7 +138,7 @@ public class RequestDataSource implements RemoteDataSource {
     public Observable<Map<String, Object>> requestDouBanMovieDetail(String cityName, String id) {
         Map<String, String> map = new HashMap<>();
         map.put("apikey", "0b2bdeda43b5688921839c8ecb20399b");
-        map.put("city", "上海");
+        map.put("city", cityName);
         map.put("client", "");
         map.put("udid", "");
         return AppRetrofit.getInstance().getHttpService().getMovieDetail(id, map);
@@ -148,7 +148,7 @@ public class RequestDataSource implements RemoteDataSource {
     public Observable<Map<String, Object>> requestDouBanMoviePhotos(String cityName, String id) {
         Map<String, String> map = new HashMap<>();
         map.put("apikey", "0b2bdeda43b5688921839c8ecb20399b");
-        map.put("city", "上海");
+        map.put("city", cityName);
         map.put("client", "");
         map.put("udid", "");
         map.put("start", "0");
@@ -159,7 +159,7 @@ public class RequestDataSource implements RemoteDataSource {
     public Observable<Map<String, Object>> requestDouBanMovieReviews(String cityName, String id) {
         Map<String, String> map = new HashMap<>();
         map.put("apikey", "0b2bdeda43b5688921839c8ecb20399b");
-        map.put("city", "上海");
+        map.put("city", cityName);
         map.put("client", "");
         map.put("udid", "");
         map.put("start", "0");

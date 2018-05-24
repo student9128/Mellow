@@ -31,6 +31,7 @@
     <string name="one_home">Home</string>
     <string name="one_chinese_week">Week</string>
     <string name="login_success_tip">Login Success</string>
+    <string name="location_choice">Location Choice</string>
 
     <string name="http_error_unauthorized">Unauthorized</string>
     <string name="http_error_forbidden">Request Forbidden</string>

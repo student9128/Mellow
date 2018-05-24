@@ -42,10 +42,12 @@ public class LoginActivity extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         toolBar.setVisibility(View.GONE);
-        LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.fl_content);
+        LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fl_content);
         if (null == loginFragment) {
             loginFragment = LoginFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), loginFragment, R.id.fl_content);
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), loginFragment, R.id
+                    .fl_content);
         }
     }
 
