@@ -134,7 +134,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         //        drawerLayout.setScrimColor(Color.TRANSPARENT);//drawerLayout滑出是侧边的阴影
 //        drawerLayout.addDrawerListener(this);
 //        navView.setItemIconTintList(null);//可以让图标保持原有颜色
-        changeDrawerLayoutResponseArea();
+//        changeDrawerLayoutResponseArea();
 
 
         navView.setItemIconTintList(null);

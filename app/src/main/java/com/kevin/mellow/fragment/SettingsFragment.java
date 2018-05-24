@@ -1,10 +1,18 @@
 package com.kevin.mellow.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.kevin.mellow.R;
 import com.kevin.mellow.base.BaseFragment;
 import com.kevin.mellow.constant.Constants;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> on 2017/12/21.
@@ -17,6 +25,8 @@ import com.kevin.mellow.constant.Constants;
 public class SettingsFragment extends BaseFragment {
 
 
+    @BindView(R.id.tv_text)
+    TextView tvText;
 
     public static SettingsFragment newInstance(String s) {
         SettingsFragment fragment = new SettingsFragment();
@@ -28,12 +38,13 @@ public class SettingsFragment extends BaseFragment {
 
     @Override
     public int setLayoutResId() {
-        return R.layout.fragment_one;
+        return R.layout.fragment_settings;
     }
 
     @Override
     public void initView() {
-
+        String locationInfo = getStringSp("locationInfo");
+        tvText.setText(locationInfo);
     }
 
     @Override
