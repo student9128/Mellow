@@ -87,7 +87,7 @@ public class AppBaseFragment extends Fragment {
 //===============Tools=================//
 
     public void showToast(String message) {
-        ToastUtils.showToast(mActivity, message);
+        ToastUtils.showToast(BaseApplication.getContext(), message);
     }
 
     public void showError(int resId) {

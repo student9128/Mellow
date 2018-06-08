@@ -24,7 +24,7 @@ public class ToastUtils {
 
     public static void showToast(Context context, String message) {
         if (mShortToast == null) {
-            mShortToast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+            mShortToast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
         }
         mShortToast.setText(message);
         mShortToast.show();
@@ -33,7 +33,7 @@ public class ToastUtils {
 
     public static void showToast(String message, Context context) {
         if (mShortToast == null) {
-            mShortToast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+            mShortToast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
         }
         mShortToast.setText(message);
         mShortToast.show();
@@ -42,7 +42,7 @@ public class ToastUtils {
 
     public static void showLongToast(Context context, String message) {
         if (mLongToast == null) {
-            mLongToast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+            mLongToast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG);
         }
         mLongToast.setText(message);
         mLongToast.show();

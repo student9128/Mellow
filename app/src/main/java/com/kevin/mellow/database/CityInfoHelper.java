@@ -17,7 +17,9 @@ public class CityInfoHelper extends SQLiteOpenHelper {
 
     public static CityInfoHelper getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new CityInfoHelper(context);
+            synchronized (CityInfoHelper.class) {
+                mInstance = new CityInfoHelper(context);
+            }
 
         }
         return mInstance;
@@ -38,7 +40,7 @@ public class CityInfoHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql="DROP TABLE IF EXISTS "+CityTable.TABLE_NAME;
+        String sql = "DROP TABLE IF EXISTS " + CityTable.TABLE_NAME;
         db.execSQL(sql);
         onCreate(db);
 
@@ -46,7 +48,7 @@ public class CityInfoHelper extends SQLiteOpenHelper {
 
     public boolean isTableExists(String tabName) {
         boolean result = false;
-        if(tabName == null){
+        if (tabName == null) {
             return false;
         }
         SQLiteDatabase db = null;
@@ -54,12 +56,13 @@ public class CityInfoHelper extends SQLiteOpenHelper {
         try {
             db = this.getReadableDatabase();//此this是继承SQLiteOpenHelper类得到的
 //            db = SQLiteDatabase.openDatabase("search.db", Context.MODE_PRIVATE, null);
-            String sql = "select count(*) as c from sqlite_master where type = 'table' and name= '" +
-                    tabName+"'";
+            String sql = "select count(*) as c from sqlite_master where type = 'table' and name= " +
+                    "'" +
+                    tabName + "'";
             cursor = db.rawQuery(sql, null);
-            if(cursor.moveToNext()){
+            if (cursor.moveToNext()) {
                 int count = cursor.getInt(0);
-                if(count>0){
+                if (count > 0) {
                     result = true;
                 }
             }

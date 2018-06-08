@@ -111,12 +111,16 @@ public class AppBaseActivity extends AppCompatActivity {
     }
     //===============Tool=================//
 
+    /**
+     * 使用ApplicationContext防止内存泄漏
+     * @param message
+     */
     public void showToast(String message) {
-        ToastUtils.showToast(this, message);
+        ToastUtils.showToast(getApplicationContext(), message);
     }
 
     public void showLongToast(String message) {
-        ToastUtils.showLongToast(this, message);
+        ToastUtils.showLongToast(getApplicationContext(), message);
     }
 
     public void printLoge(String str) {

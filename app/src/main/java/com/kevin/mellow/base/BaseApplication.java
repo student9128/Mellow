@@ -12,6 +12,7 @@ import android.text.TextUtils;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.kevin.mellow.service.LocationService;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class BaseApplication extends Application {
         mVibrator = (Vibrator) mContext.getSystemService(Service.VIBRATOR_SERVICE);
         SDKInitializer.initialize(getApplicationContext());//百度地图初始化
         mLocationService = LocationService.getInstance(getApplicationContext());
+        LeakCanary.install(this);
     }
 
     private void initLifecycle() {

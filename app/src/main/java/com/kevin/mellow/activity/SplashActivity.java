@@ -2,6 +2,7 @@ package com.kevin.mellow.activity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -41,7 +42,8 @@ public class SplashActivity extends AppCompatActivity {
     ImageView ivLogo;
     @BindView(R.id.type_text_view)
     TyperTextView typeTextView;
-//    @BindView(R.id.line_text_view)
+    private Boolean isFirst;
+    //    @BindView(R.id.line_text_view)
 //    LineTextView lineTextView;
 
     @Override
@@ -68,7 +70,13 @@ public class SplashActivity extends AppCompatActivity {
 //        lineTextView.animateText(getText(R.string.app_name));
 //        lineTextView.setLineColor(ContextCompat.getColor(this,R.color.white));
         typeTextView.animateText(getText(R.string.statement));
-        Boolean isFirst = SPUtil.getBooleanSP("isFirst", this);//默认为false
+        //默认为false
+        isFirst = SPUtil.getBooleanSP("isFirst", this);
+        new CityInfoTask().execute();
+
+    }
+
+    private void initCityInfo(Boolean isFirst) {
         if (!isFirst) {
             DBManager dbManager = DBManager.getInstance();
             String cityInformation = FileUtil.readInfo(this);
@@ -91,7 +99,8 @@ public class SplashActivity extends AppCompatActivity {
             }
             SPUtil.setSP("isFirst", this, true);
         } else {
-            CityInfoHelper cityInfoHelper = CityInfoHelper.getInstance(this);
+            //防止内存泄漏
+            CityInfoHelper cityInfoHelper = CityInfoHelper.getInstance(getApplicationContext());
             boolean tableExists = cityInfoHelper.isTableExists(CityDataEntityDao.TABLENAME);
             if (!tableExists) {
                 DBManager dbManager = DBManager.getInstance();
@@ -114,20 +123,34 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }
+    }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
 
-                //从显示到完全透明
-                Animation fadeOut = AnimationUtils.loadAnimation(SplashActivity.this, R.anim
-                        .animation_fadeout);
-                fadeOut.setFillAfter(true);
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                finish();
-            }
-        }, 2000);
+    class CityInfoTask extends AsyncTask<Void,Void,Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            initCityInfo(isFirst);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    //从显示到完全透明
+                    Animation fadeOut = AnimationUtils.loadAnimation(SplashActivity.this, R.anim
+                            .animation_fadeout);
+                    fadeOut.setFillAfter(true);
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN,
+                            WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    finish();
+                }
+            }, 2000);
+        }
     }
 }
