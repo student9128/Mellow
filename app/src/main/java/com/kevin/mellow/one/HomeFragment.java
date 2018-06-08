@@ -74,6 +74,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     @Override
+    public String getUniqueTag() {
+        return getDisposableKey();
+    }
+
+
+    @Override
     public void addData(List<String> data) {
         mPresenter.requestOneList(data.get(0));
     }

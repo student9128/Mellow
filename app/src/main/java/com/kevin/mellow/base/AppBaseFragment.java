@@ -11,7 +11,7 @@ import com.kevin.mellow.utils.SPUtil;
 import com.kevin.mellow.utils.ToastUtils;
 
 /**
- * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> for Project KevinSummary on 2017/9/8.
+ * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> for Project Mellow on 2017/9/8.
  * <h3>Description:</h3>
  * <div>
  * Base class for all the fragments in the app extends {@link android.support.v4.app.Fragment}.
@@ -21,8 +21,9 @@ import com.kevin.mellow.utils.ToastUtils;
 
 
 public class AppBaseFragment extends Fragment {
+
     /**
-     * Tag,can be used for log or toast.
+     * Tag,the class name.
      */
     public String TAG = getClass().getSimpleName();
     /**

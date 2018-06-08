@@ -174,6 +174,12 @@ public class DouBanMovieDetailActivity extends BaseActivity implements DouBanDet
     }
 
     @Override
+    public String getUniqueTag() {
+        return getDisposableKey();
+    }
+
+
+    @Override
     public void showProgressDialog() {
         showLoadingDialog();
     }

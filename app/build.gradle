@@ -49,11 +49,11 @@ android {
             shrinkResources true
         }
         debug{
-            minifyEnabled true
+            minifyEnabled false
             //Zipalign优化
-            zipAlignEnabled true
+//            zipAlignEnabled true
             // 移除无用的resource文件
-            shrinkResources true
+//            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 

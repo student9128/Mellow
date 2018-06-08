@@ -48,7 +48,7 @@ public class DouBanDetailPresenter implements DouBanDetailContract.Presenter {
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Map<String, Object>>() {
+                .subscribe(new BaseObserver<Map<String, Object>>(view,view.getUniqueTag()) {
                     @Override
                     public void onNext(Map<String, Object> stringObjectMap) {
                         super.onNext(stringObjectMap);

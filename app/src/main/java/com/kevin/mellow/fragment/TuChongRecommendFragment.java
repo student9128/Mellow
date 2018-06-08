@@ -135,7 +135,11 @@ public class TuChongRecommendFragment extends BaseFragment implements TuChongRec
     public void setPresenter(TuChongRecommendContract.Presenter presenter) {
         mPresenter = presenter;
     }
-
+    @Override
+    public String getUniqueTag() {
+        printLogi(getDisposableKey());
+        return getDisposableKey();
+    }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {

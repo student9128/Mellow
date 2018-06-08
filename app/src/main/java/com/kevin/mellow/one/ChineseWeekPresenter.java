@@ -60,6 +60,6 @@ public class ChineseWeekPresenter implements ChineseContract.Presenter {
                 view.showTip("RequestFailed:: " + t.getMessage());
             }
         });
-//        call.cancel();
+        call.cancel();
     }
 }

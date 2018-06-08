@@ -21,6 +21,7 @@ import com.kevin.mellow.activity.LocationActivity;
 import com.kevin.mellow.adapter.LocationAdapter;
 import com.kevin.mellow.base.BaseActivity;
 import com.kevin.mellow.base.BaseApplication;
+import com.kevin.mellow.base.DisposableManager;
 import com.kevin.mellow.constant.Constants;
 import com.kevin.mellow.fragment.CenterWeatherFragment;
 import com.kevin.mellow.fragment.DouBanFragment;
@@ -296,6 +297,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 actionBar.setTitle(getString(R.string.settings));
                 break;
             case R.id.nav_sign_out:
+                DisposableManager.removeAll();//清楚所以请求
                 android.os.Process.killProcess(android.os.Process.myPid());
                 break;
             default:

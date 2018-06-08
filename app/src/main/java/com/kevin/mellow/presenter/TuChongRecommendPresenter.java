@@ -61,7 +61,7 @@ public class TuChongRecommendPresenter implements TuChongRecommendContract.Prese
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Map<String, Object>>() {
+                .subscribe(new BaseObserver<Map<String, Object>>(view,view.getUniqueTag()) {
                     @Override
                     public void onNext(Map<String, Object> stringObjectMap) {
                         super.onNext(stringObjectMap);
@@ -107,7 +107,7 @@ public class TuChongRecommendPresenter implements TuChongRecommendContract.Prese
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<Map<String, Object>>(discoverView) {
+                .subscribe(new BaseObserver<Map<String, Object>>(discoverView,discoverView.getUniqueTag()) {
                     @Override
                     public void onNext(Map<String, Object> stringObjectMap) {
                         super.onNext(stringObjectMap);

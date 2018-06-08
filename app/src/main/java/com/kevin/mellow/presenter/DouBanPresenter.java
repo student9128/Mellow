@@ -13,6 +13,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -28,6 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 public class DouBanPresenter implements DouBanContract.Presenter {
     private DouBanContract.View view;
     private RequestDataSource requestDataSource;
+//    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public DouBanPresenter(DouBanContract.View view, RequestDataSource requestDataSource) {
         this.view = view;
@@ -38,7 +40,8 @@ public class DouBanPresenter implements DouBanContract.Presenter {
     @Override
     public void requestData(String cityName, String page, final String type) {
 
-        Observable<DouBanMovieBean> observable2 = requestDataSource.requestDouBan(cityName, page);
+        final Observable<DouBanMovieBean> observable2 = requestDataSource.requestDouBan(cityName,
+                page);
         observable2.subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -48,7 +51,13 @@ public class DouBanPresenter implements DouBanContract.Presenter {
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<DouBanMovieBean>(view) {
+                .subscribe(new BaseObserver<DouBanMovieBean>(view,view.getUniqueTag()) {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                        super.onSubscribe(d);
+//                        compositeDisposable.add(d);
+//                    }
+
                     @Override
                     public void onNext(DouBanMovieBean douBanMovieBean) {
                         String s = new Gson().toJson(douBanMovieBean);
@@ -79,6 +88,12 @@ public class DouBanPresenter implements DouBanContract.Presenter {
                     }
                 });
 
+
     }
 
+
+//    @Override
+//    public void unSubscriber() {
+//        compositeDisposable.clear();
+//    }
 }

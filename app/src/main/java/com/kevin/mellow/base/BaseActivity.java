@@ -48,7 +48,7 @@ import butterknife.ButterKnife;
 
 
 /**
- * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> for Project KevinSummary on 2017/9/8.
+ * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> for Project Mellow on 2017/9/8.
  * <h3>Description:</h3>
  * <div>
  * <br/>Base class for all the activities in the app except AppBaseActivity.
@@ -86,7 +86,8 @@ public abstract class BaseActivity extends AppBaseActivity implements
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams
+// .FLAG_SECURE);
         setContentView(setLayoutResId());
         ButterKnife.bind(this);
         setSupportActionBar(toolBar);
@@ -105,7 +106,13 @@ public abstract class BaseActivity extends AppBaseActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        DisposableManager.removeDispose(getDisposableKey());
 //        unregisterReceiver(keyReceiver);
+    }
+
+    public String getDisposableKey() {
+//        return getPackageName()+SEP+TAG;
+        return getClass().getName();
     }
 
     public abstract int setLayoutResId();
@@ -176,7 +183,8 @@ public abstract class BaseActivity extends AppBaseActivity implements
     }
 
     //    @Override
-    public void showNormalDialog(int titleResId, int contentResId, DialogContract.DialogBtnClickListener listener) {
+    public void showNormalDialog(int titleResId, int contentResId, DialogContract
+            .DialogBtnClickListener listener) {
 
     }
 
@@ -201,14 +209,11 @@ public abstract class BaseActivity extends AppBaseActivity implements
     }
 
 
-
     public void showFragmentDialog(DialogFragment dialog, String tag) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(dialog, tag);
         ft.commitAllowingStateLoss();
     }
-
-
 
 
 }

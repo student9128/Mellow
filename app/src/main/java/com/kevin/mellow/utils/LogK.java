@@ -7,7 +7,7 @@ import com.kevin.mellow.BuildConfig;
 
 /**
  * <p>
- * Created by <b><a style="color:#8BC34A"href="http://blog.csdn.net/student9128">Jingpeng</ a></b> on 2017/2/16.
+ * Created by <b><a style="color:#8BC34A"href="http://blog.csdn.net/student9128">Kevin</ a></b> on 2017/2/16.
  * <p>
  * <p>
  * <br/>the utils for log.

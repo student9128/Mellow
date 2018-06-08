@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.TypedValue;
 
 /**
- * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> for Project KevinSummary on 2017/9/12.
+ * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> for Project Mellow on 2017/9/12.
  * <h3>Description:</h3>
  * <div>
  * <div/>

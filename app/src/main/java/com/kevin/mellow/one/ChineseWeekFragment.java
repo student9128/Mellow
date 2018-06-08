@@ -111,6 +111,12 @@ public class ChineseWeekFragment extends BaseFragment implements ChineseContract
     }
 
     @Override
+    public String getUniqueTag() {
+        return getDisposableKey();
+    }
+
+
+    @Override
     public void showTip(String msg) {
         showToast(msg);
     }

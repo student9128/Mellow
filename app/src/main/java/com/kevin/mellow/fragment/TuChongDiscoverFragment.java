@@ -177,6 +177,12 @@ public class TuChongDiscoverFragment extends BaseFragment implements TuChongReco
         this.mPresenter = presenter;
     }
 
+    @Override
+    public String getUniqueTag() {
+        printLogi(getDisposableKey());
+        return getDisposableKey();
+    }
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

@@ -26,17 +26,16 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseFragment extends AppBaseFragment {
-
     protected View mView;
     public Unbinder unbinder;
     private boolean isViewCreated = false;
     private boolean isUIVisible = false;
     private BaseDialog mProgressDialog;
     private BaseDialog mFingerprintDialog;
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
+            Bundle savedInstanceState) {
         mView = inflater.inflate(setLayoutResId(), container, false);
         ButterKnife.bind(this, mView);
         unbinder = ButterKnife.bind(this, mView);
@@ -111,8 +110,9 @@ public abstract class BaseFragment extends AppBaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        DisposableManager.removeDispose(getClass().getName());
         unbinder.unbind();
-        printLogi("onDestroyView===========");
+        printLogi("onDestroyView==========="+getClass().getSimpleName());
     }
 
     @Override
@@ -132,6 +132,11 @@ public abstract class BaseFragment extends AppBaseFragment {
         } else {
             isUIVisible = false;
         }
+    }
+
+    public String getDisposableKey() {
+//        return mActivity.getPackageName()+SEP+TAG;
+        return getClass().getName();
     }
 
     private void lazyLoad() {
@@ -243,7 +248,8 @@ public abstract class BaseFragment extends AppBaseFragment {
     }
 
     //    @Override
-    public void showAlertDialog(int titleResId, int contentResId, DialogContract.DialogBtnClickListener listener) {
+    public void showAlertDialog(int titleResId, int contentResId, DialogContract
+            .DialogBtnClickListener listener) {
         DialogContract dialogContract = (DialogContract) mActivity;
         if (dialogContract != null && !isDetached()) {
             dialogContract.showAlertDialog(titleResId, contentResId, listener);
@@ -259,7 +265,8 @@ public abstract class BaseFragment extends AppBaseFragment {
     }
 
     //    @Override
-    public void showNormalDialog(int titleResId, int contentResId, DialogContract.DialogBtnClickListener listener) {
+    public void showNormalDialog(int titleResId, int contentResId, DialogContract
+            .DialogBtnClickListener listener) {
         DialogContract dialogContract = (DialogContract) mActivity;
         if (dialogContract != null && !isDetached()) {
             dialogContract.showNormalDialog(titleResId, contentResId, listener);

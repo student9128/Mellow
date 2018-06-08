@@ -10,4 +10,6 @@ package com.kevin.mellow.base;
 
 public interface AppBaseView<T> {
     void setPresenter(T presenter);
+
+    String getUniqueTag();
 }

@@ -153,6 +153,11 @@ public class DouBanFragment extends BaseFragment implements DouBanContract.View,
     }
 
     @Override
+    public String getUniqueTag() {
+        return getDisposableKey();
+    }
+
+    @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         mPresenter.requestData(cityName, "0", Constants.TYPE_REFRESH);
     }

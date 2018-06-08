@@ -76,6 +76,7 @@ public class HomePresenter implements HomeContract.Presenter {
                 Log.d("TAG", "onFailure: " + t.getMessage());
             }
         });
+        call.cancel();
     }
 
     @Override
@@ -104,5 +105,6 @@ public class HomePresenter implements HomeContract.Presenter {
                 view.showTip("Request failed:: " + t.getMessage());
             }
         });
+        call.cancel();
     }
 }

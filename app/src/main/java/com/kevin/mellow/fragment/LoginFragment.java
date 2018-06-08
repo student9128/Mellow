@@ -111,6 +111,11 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     }
 
     @Override
+    public String getUniqueTag() {
+        return getDisposableKey();
+    }
+
+    @Override
     public void showProgress() {
         showLoadingDialog();
     }

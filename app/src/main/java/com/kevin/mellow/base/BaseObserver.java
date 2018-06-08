@@ -1,6 +1,8 @@
 package com.kevin.mellow.base;
 
 
+import android.view.View;
+
 import com.google.gson.JsonParseException;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.kevin.mellow.http.HttpStatusCode;
@@ -27,21 +29,28 @@ public abstract class BaseObserver<T> implements Observer<T> {
     /***自定义编码****/
     private static final int CONNECT_EXCEPTION = 1001;
     private static final int INTERRUPTED_IO_EXCEPTION = 1002;
-    private static final int PARSE_CEPTION = 1003;
-    private static final int UNKNOW_ERROR = 1004;
+    private static final int PARSE_EXCEPTION = 1003;
+    private static final int UNKNOWN_ERROR = 1004;
     private BaseView baseView;
+    private String key;
+    private Disposable disposable;
 
     public BaseObserver(BaseView baseView) {
         this.baseView = baseView;
     }
 
+    public BaseObserver(BaseView baseView, String tag) {
+        this.baseView = baseView;
+        this.key = tag;
+    }
 
     public BaseObserver() {
     }
 
     @Override
     public void onSubscribe(Disposable d) {
-
+        disposable = d;
+        DisposableManager.addDispose(key, d);
     }
 
     @Override
@@ -69,18 +78,18 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
         {
             //解析错误
-            baseView.showError(HttpStatusCode.getErrorDesResId(PARSE_CEPTION));
+            baseView.showError(HttpStatusCode.getErrorDesResId(PARSE_EXCEPTION));
         } else
 
         {
             //未知错误
-            baseView.showError(HttpStatusCode.getErrorDesResId(UNKNOW_ERROR));
+            baseView.showError(HttpStatusCode.getErrorDesResId(UNKNOWN_ERROR));
         }
-
+        DisposableManager.removeDispose(key);
     }
 
     @Override
     public void onComplete() {
-
+        DisposableManager.removeDispose(key);
     }
 }
