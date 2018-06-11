@@ -98,3 +98,15 @@ public static java.lang.String TABLENAME;
 -keepclasseswithmembernames class * {
     @butterknife.* <methods>;
 }
+
+
+###########和风天气#################
+#排除okhttp
+  -dontwarn com.squareup.**
+  -dontwarn okio.**
+  -keep public class org.codehaus.* { *; }
+  -keep public class java.nio.* { *; }
+
+#排除HeWeather
+  -dontwarn interfaces.heweather.com.interfacesmodule.**
+  -keep class interfaces.heweather.com.interfacesmodule.** { *;}

@@ -35,6 +35,8 @@ public class AppRetrofit {
     public static String BASE_URL_TOU_TIAO = "http://is.snssdk.com/";
     public static String BASE_URL_NEI_HAN = "http://lf.snssdk.com/neihan/service/tabs/";
     public static String BASE_URL_DOU_BAN = "https://api.douban.com/";
+    public static String BASE_URL_WEATHER_SEARCH_CITY = "https://search.heweather.com/";
+    public static String BASE_URL_HE_WEATHER = "https://free-api.heweather.com/";
     private static int CONNET_TIME_OUT = 20;
     private static int READ_TIME_OUT = 120;
     private Retrofit retrofit;
@@ -98,6 +100,10 @@ public class AppRetrofit {
                         newBaseUrl = HttpUrl.parse(BASE_URL_TU_CHONG);
                     } else if ("dou_ban".equals(headerValue)) {
                         newBaseUrl = HttpUrl.parse(BASE_URL_DOU_BAN);
+                    } else if ("weather_search_city".equals(headerValue)) {
+                        newBaseUrl = HttpUrl.parse(BASE_URL_WEATHER_SEARCH_CITY);
+                    } else if ("he_weather".equals(headerValue)) {
+                        newBaseUrl = HttpUrl.parse(BASE_URL_HE_WEATHER);
                     } else {
                         newBaseUrl = oldHttpUrl;
                     }

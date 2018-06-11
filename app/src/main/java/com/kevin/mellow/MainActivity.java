@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +19,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.kevin.mellow.activity.LocationActivity;
-import com.kevin.mellow.adapter.LocationAdapter;
 import com.kevin.mellow.base.BaseActivity;
 import com.kevin.mellow.base.BaseApplication;
 import com.kevin.mellow.base.DisposableManager;
 import com.kevin.mellow.constant.Constants;
-import com.kevin.mellow.fragment.CenterWeatherFragment;
+import com.kevin.mellow.fragment.WeatherFragment;
 import com.kevin.mellow.fragment.DouBanFragment;
 import com.kevin.mellow.fragment.LiVideoFragment;
 import com.kevin.mellow.fragment.TuChongFragment;
@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     private DouBanFragment douBanFragment;
     private TuChongFragment oneArticleFragment;
-    private CenterWeatherFragment centerWeatherFragment;
+    private WeatherFragment centerWeatherFragment;
     private LiVideoFragment liVideoFragment;
     private SettingsFragment settingsFragment;
     private Fragment mTempFragment;
@@ -91,6 +91,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private LocationService mLocationService;
     private LocationListener mListener;
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -100,7 +101,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mLocationService.setLocationOption(mLocationService.getDefaultLocationClientOption());
         mLocationService.start();
         String locationCity = getStringSp(Constants.LOCATION_CITY);
-        if (!TextUtils.isEmpty(locationCity)) {
+        if (!TextUtils.isEmpty(locationCity) && mTempFragment == douBanFragment) {
             tvTitle.setText(locationCity);
             tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18f);
             tvTitle.setVisibility(View.VISIBLE);
@@ -270,7 +271,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 break;
             case R.id.nav_center_weather:
                 if (centerWeatherFragment == null) {
-                    centerWeatherFragment = CenterWeatherFragment.newInstance(getString(R.string
+                    centerWeatherFragment = WeatherFragment.newInstance(getString(R.string
                             .center_weather));
                 }
                 tvTitle.setVisibility(View.GONE);
@@ -351,6 +352,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     /**
      * 该方法在onStart之前执行，因此将获取的值存储起来
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -363,5 +365,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 //            tvTitle.setText(city);
             setSp(Constants.LOCATION_CITY, city);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        centerWeatherFragment.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 }

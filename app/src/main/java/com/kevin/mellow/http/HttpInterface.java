@@ -74,7 +74,44 @@ public interface HttpInterface {
     Observable<Map<String, Object>> getMovieReviews(@Path("id") String id,
                                                     @QueryMap Map<String, String> map);
 
+    /**
+     * 城市查找
+     * @param map
+     * @return
+     */
+    @Headers("url_name:weather_search_city")
+    @GET("find?")
+    Observable<Map<String, Object>> getWeatherCity(@QueryMap Map<String,String> map);
+
+    /**
+     * 热门城市
+     *
+     * @return
+     */
+    @Headers("url_name:weather_search_city")
+    @GET("top?")
+    Observable<Map<String, Object>> getHotCity();
+
+    /**
+     * 3天预报
+     * @param map
+     * @return
+     */
+    @Headers("url_name:he_weather")
+    @GET("s6/weather/forecast?")
+    Observable<Map<String, Object>> getCityWeather(@QueryMap Map<String, String> map);
+
+    /**
+     * 获取当前实况信息
+     * @param map
+     * @return
+     */
+    @Headers("url_name:he_weather")
+    @GET("s6/weather/now?")
+    Observable<Map<String, Object>> getCurrentWeather(@QueryMap Map<String, String> map);
+
 //    @Headers("url_name:dou_ban")
 //    @GET("v2/movie/in_theaters?")
 //    Observable<BaseResponse<DouBanMovieBean>> getDouBanMovie(@QueryMap Map<String, String> map);
+
 }

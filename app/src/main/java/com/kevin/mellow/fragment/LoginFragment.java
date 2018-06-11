@@ -30,7 +30,9 @@ import butterknife.BindView;
  */
 
 
-public class LoginFragment extends BaseFragment implements LoginContract.View, View.OnClickListener, FingerprintUtil.OnAuthFingerprintListener, FingerprintUtil.OnAuthCancelListener {
+public class LoginFragment extends BaseFragment implements LoginContract.View, View
+        .OnClickListener, FingerprintUtil.OnAuthFingerprintListener, FingerprintUtil
+        .OnAuthCancelListener {
     @BindView(R.id.tv_username)
     ImageView tvUsername;
     @BindView(R.id.et_username)
@@ -74,9 +76,9 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     @Override
     public void initView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        fingerprintUtil = new FingerprintUtil(mActivity);
-        fingerprintUtil.initFingerprint();
-        fingerprintDialog = FingerprintDialog.newInstance();
+            fingerprintUtil = new FingerprintUtil(mActivity);
+            fingerprintUtil.initFingerprint();
+            fingerprintDialog = FingerprintDialog.newInstance();
         }
 //        Bitmap bitmap = ((BitmapDrawable) ivLogo.getDrawable()).getBitmap();
 //        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 8,
@@ -95,8 +97,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
     public void initListener() {
         btnLogin.setOnClickListener(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        fingerprintUtil.setOnAuthSuccessListener(this);
-        fingerprintUtil.setOnAuthCancelListener(this);
+            fingerprintUtil.setOnAuthSuccessListener(this);
+            fingerprintUtil.setOnAuthCancelListener(this);
         }
     }
 
@@ -107,7 +109,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View, V
 
     @Override
     public void setPresenter(LoginContract.Presenter presenter) {
-
+        mPresenter = presenter;
     }
 
     @Override

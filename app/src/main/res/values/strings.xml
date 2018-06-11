@@ -16,17 +16,21 @@
 
     <string name="dou_ban">Dou Ban</string>
     <string name="tu_chong">Tu Chong</string>
-    <string name="center_weather">Center Weather</string>
-    <string name="li_video">Li Video</string>
+    <string name="center_weather">Weather</string>
+    <string name="li_video">Video</string>
     <string name="settings">Settings</string>
     <string name="sign_out">Sign Out</string>
     <string name="statement">Created by Kevin.</string>
 
     <string name="tu_chong_recommend">Recommend</string>
     <string name="tu_chong_discover">Discover</string>
+    <string name="city_manage">City Manage</string>
+    <string name="city_search_hint">Text city name</string>
 
     <string name="action_open_in_browser">Open in browser</string>
     <string name="action_copy_url">Copy url</string>
+    <string name="action_share">Share</string>
+    <string name="action_city_manage">City Manage</string>
 
     <string name="one_home">Home</string>
     <string name="one_chinese_week">Week</string>

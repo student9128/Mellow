@@ -37,7 +37,7 @@ public abstract class BaseFragment extends AppBaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
         mView = inflater.inflate(setLayoutResId(), container, false);
-        ButterKnife.bind(this, mView);
+//        ButterKnife.bind(this, mView);
         unbinder = ButterKnife.bind(this, mView);
         initView();
         initData();

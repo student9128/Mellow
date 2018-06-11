@@ -11,6 +11,8 @@ package com.kevin.mellow.constant;
 public class Constants {
     public static final String ARGS = "args";
 
+    public static final String WEATHER_KEY = "e1b3e9e2f292435692ea7ecb571d5701";
+
     public static final String TYPE_REFRESH = "refresh";
     public static final String TYPE_LOAD_MORE = "loadMore";
 

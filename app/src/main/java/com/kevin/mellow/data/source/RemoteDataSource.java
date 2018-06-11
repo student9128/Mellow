@@ -41,7 +41,45 @@ public interface RemoteDataSource {
     Observable<Map<String, Object>> requestDouBanMovieReviews(String cityName, String id);
 
 
+    /**
+     * 图虫推荐界面
+     * @param type
+     * @param postId
+     * @param page
+     * @return
+     */
     Observable<Map<String, Object>> requestTuChongRecommend(String type, String postId, String page);
 
+    /**
+     * 图虫发现界面
+     * @return
+     */
     Observable<Map<String, Object>> requestTuDiscover();
+
+    /**
+     * 获取城市信息
+     * @param cityName
+     * @return
+     */
+    Observable<Map<String, Object>> requestWeatherCity(String cityName);
+
+    /**
+     * 获取热门城市信息
+     * @return
+     */
+    Observable<Map<String, Object>> requestHotCity();
+
+    /**
+     * 根据城市名字获取天气预报信息
+     * @param cityName
+     * @return
+     */
+    Observable<Map<String, Object>> requestCityWeather(String cityName);
+
+    /**
+     * 获取某个城市当前天气信息
+     * @param cityName
+     * @return
+     */
+    Observable<Map<String, Object>> requestCurrentWeather(String cityName);
 }

@@ -3,6 +3,7 @@ package com.kevin.mellow.data.source;
 import android.support.annotation.NonNull;
 
 import com.kevin.mellow.bean.DouBanMovieBean;
+import com.kevin.mellow.constant.Constants;
 import com.kevin.mellow.http.AppRetrofit;
 
 import java.util.HashMap;
@@ -70,7 +71,7 @@ public class RequestDataSource implements RemoteDataSource {
         map.put("source_id", "9261");
         return new AppRetrofit().getHttpService().getItemList(map);
     }
-    
+
 //    @Override
 //    public Call<Map<String, Object>> requestOneArticle() {
 ////        Map<String, String> map = new HashMap<>();
@@ -168,7 +169,8 @@ public class RequestDataSource implements RemoteDataSource {
 
 
     @Override
-    public Observable<Map<String, Object>> requestTuChongRecommend(String type, String postId, String page) {
+    public Observable<Map<String, Object>> requestTuChongRecommend(String type, String postId,
+                                                                   String page) {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("os_api", "22");
         map.put("device_type", "");
@@ -191,7 +193,7 @@ public class RequestDataSource implements RemoteDataSource {
 //        } else {
 //            map.put("post_id", postId);
 //        }
-        map.put("post_id",postId);
+        map.put("post_id", postId);
         map.put("page", page);
         map.put("type", type);
         return AppRetrofit.getInstance().getHttpService().getTuChongRecommend(map);
@@ -217,6 +219,47 @@ public class RequestDataSource implements RemoteDataSource {
         map.put("app_name", "");
         map.put("version_name", "");
         return AppRetrofit.getInstance().getHttpService().getTuChongDiscover(map);
+    }
+
+    @Override
+    public Observable<Map<String, Object>> requestWeatherCity(String cityName) {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("location", cityName);
+        map.put("key", "e1b3e9e2f292435692ea7ecb571d5701");
+        map.put("group", "cn");
+        map.put("number", "10");
+        map.put("lang", "cn");
+        return AppRetrofit.getInstance().getHttpService().getWeatherCity(map);
+    }
+
+    @Override
+    public Observable<Map<String, Object>> requestHotCity() {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("key", "e1b3e9e2f292435692ea7ecb571d5701");
+        map.put("group", "cn");
+//        map.put("number", "12");
+        map.put("lang", "cn");
+        return AppRetrofit.getInstance().getHttpService().getHotCity();
+    }
+
+    @Override
+    public Observable<Map<String, Object>> requestCityWeather(String cityName) {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("location", cityName);
+        map.put("key", Constants.WEATHER_KEY);
+        map.put("lang", "cn");
+        map.put("unit", "m");
+        return AppRetrofit.getInstance().getHttpService().getCityWeather(map);
+    }
+
+    @Override
+    public Observable<Map<String, Object>> requestCurrentWeather(String cityName) {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("location", cityName);
+        map.put("key", Constants.WEATHER_KEY);
+        map.put("lang", "cn");
+        map.put("unit", "m");
+        return AppRetrofit.getInstance().getHttpService().getCurrentWeather(map);
     }
 
 

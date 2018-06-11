@@ -72,6 +72,8 @@
         <activity android:name=".activity.DouBanMovieDetailActivity" />
         <activity android:name=".activity.WebViewActivity"/>
         <activity android:name=".activity.LocationActivity"/>
+        <activity android:name=".activity.CitySearchActivity"/>
+        <activity android:name=".activity.CityManageActivity"/>
         <receiver android:name=".receiver.KeyReceiver"/>
 
     </application>

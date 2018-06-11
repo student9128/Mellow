@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.kevin.mellow.R;
 import com.kevin.mellow.listener.CommonViewListener;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> on 2018/6/5.
  * <h3>
@@ -25,7 +27,7 @@ public abstract class CommonBaseFragment extends Fragment implements View.OnClic
 
     enum ViewType {
         /**
-         * 显示内容
+         * 显示内容Base
          */
         TYPE_CONTENT,
         /**
@@ -89,6 +91,10 @@ public abstract class CommonBaseFragment extends Fragment implements View.OnClic
                              @Nullable Bundle savedInstanceState) {
         //填充需要的界面
         mTempView = inflater.inflate(getContentLayoutResId(), null, false);
+//        mTempView = inflater.inflate(setLayoutResId(), null, false);
+
+//        ButterKnife.bind(this, mView);
+//        unbinder = ButterKnife.bind(this, mView);
 
         return inflater.inflate(R.layout.fragment_common_base, container, false);
     }
@@ -159,10 +165,6 @@ public abstract class CommonBaseFragment extends Fragment implements View.OnClic
             throw new RuntimeException("Your content must have a ViewStub whose id attribute is " +
                     "'R.id.vs_net_error'");
         }
-        TextView tvNoData = rootView.findViewById(R.id.tv_no_data);
-        TextView tvNetError = rootView.findViewById(R.id.tv_network_error);
-        tvNoData.setOnClickListener(this);
-        tvNetError.setOnClickListener(this);
 
 
     }
@@ -192,6 +194,7 @@ public abstract class CommonBaseFragment extends Fragment implements View.OnClic
     }
 
     public void setContentView(View view) {
+        initAllView();
         if (view == null) {
             throw new IllegalArgumentException("Content mTempView can't be null");
         }
@@ -240,6 +243,8 @@ public abstract class CommonBaseFragment extends Fragment implements View.OnClic
     private View getNetErrorView() {
         if (mNetErrorView == null) {
             mNetErrorView = mNetErrorStub.inflate();
+            TextView tvNetError = mNetErrorView.findViewById(R.id.tv_network_error);
+            tvNetError.setOnClickListener(this);
         }
         return mNetErrorView;
     }
@@ -247,6 +252,8 @@ public abstract class CommonBaseFragment extends Fragment implements View.OnClic
     private View getEmptyView() {
         if (mEmptyView == null) {
             mEmptyView = mEmptyStub.inflate();
+            TextView tvNoData = mEmptyView.findViewById(R.id.tv_no_data);
+            tvNoData.setOnClickListener(this);
         }
         return mEmptyView;
     }
@@ -300,6 +307,7 @@ public abstract class CommonBaseFragment extends Fragment implements View.OnClic
 
     /**
      * 当无数据的时候，点击进行刷新尝试
+     *
      * @param l
      */
     public void setOnEmptyClicker(CommonViewListener l) {
@@ -308,6 +316,7 @@ public abstract class CommonBaseFragment extends Fragment implements View.OnClic
 
     /**
      * 当网络异常的时候，点击进行尝试
+     *
      * @param l
      */
     public void setOnNetErrorClicker(CommonViewListener l) {
