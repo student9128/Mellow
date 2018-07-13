@@ -60,6 +60,9 @@
     <dimen name="textSize20">20sp</dimen>
     <dimen name="textSize24">24sp</dimen>
     <dimen name="textSize36">36sp</dimen>
+    <dimen name="textSize50">50sp</dimen>
+    <dimen name="textSize80">80sp</dimen>
+    <dimen name="textSize100">100sp</dimen>
 
     <dimen name="tab_layout_height">56dp</dimen>
 

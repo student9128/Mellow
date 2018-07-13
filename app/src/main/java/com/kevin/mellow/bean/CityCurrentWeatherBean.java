@@ -3,12 +3,13 @@ package com.kevin.mellow.bean;
 import java.util.List;
 
 /**
- * Created by <a href="http://blog.csdn.net/student9128">Kevin</a> on 2018/6/8.
- * <h3>
- * Describe:
- * <h3/>
+ * Created by Kevin on 2018/7/2.
+ * <p>
+ * Blog:https://student9128.github.io/
+ * CSDN:https://blog.csdn.net/student9128
+ * <p/>
  */
-public class WeatherBean {
+public class CityCurrentWeatherBean {
 
 
     private List<HeWeather6Bean> HeWeather6;
@@ -25,27 +26,17 @@ public class WeatherBean {
         /**
          * basic : {"cid":"CN101020100","location":"上海","parent_city":"上海","admin_area":"上海",
          * "cnty":"中国","lat":"31.23170662","lon":"121.47264099","tz":"+8.00"}
-         * updateCity : {"loc":"2018-06-08 15:55","utc":"2018-06-08 07:55"}
+         * update : {"loc":"2018-07-02 14:49","utc":"2018-07-02 06:49"}
          * status : ok
-         * daily_forecast : [{"cond_code_d":"101","cond_code_n":"104","cond_txt_d":"多云",
-         * "cond_txt_n":"阴","date":"2018-06-08","hum":"79","mr":"01:00","ms":"13:04",
-         * "pcpn":"2.0","pop":"58","pres":"1009","sr":"04:50","ss":"18:57","tmp_max":"28",
-         * "tmp_min":"22","uv_index":"3","vis":"20","wind_deg":"88","wind_dir":"东风",
-         * "wind_sc":"1-2","wind_spd":"4"},{"cond_code_d":"305","cond_code_n":"305",
-         * "cond_txt_d":"小雨","cond_txt_n":"小雨","date":"2018-06-09","hum":"78","mr":"01:34",
-         * "ms":"14:02","pcpn":"1.0","pop":"56","pres":"1005","sr":"04:50","ss":"18:57",
-         * "tmp_max":"26","tmp_min":"21","uv_index":"0","vis":"19","wind_deg":"164",
-         * "wind_dir":"东南风","wind_sc":"3-4","wind_spd":"14"},{"cond_code_d":"305",
-         * "cond_code_n":"101","cond_txt_d":"小雨","cond_txt_n":"多云","date":"2018-06-10",
-         * "hum":"76","mr":"02:09","ms":"15:02","pcpn":"5.0","pop":"80","pres":"1003",
-         * "sr":"04:50","ss":"18:58","tmp_max":"27","tmp_min":"21","uv_index":"2","vis":"19",
-         * "wind_deg":"10","wind_dir":"北风","wind_sc":"1-2","wind_spd":"11"}]
+         * now : {"cloud":"75","cond_code":"104","cond_txt":"阴","fl":"36","hum":"62",
+         * "pcpn":"0.0","pres":"1000","tmp":"32","vis":"10","wind_deg":"16","wind_dir":"东北风",
+         * "wind_sc":"1","wind_spd":"5"}
          */
 
         private BasicBean basic;
         private UpdateBean update;
         private String status;
-        private List<DailyForecastBean> daily_forecast;
+        private NowBean now;
 
         public BasicBean getBasic() {
             return basic;
@@ -71,12 +62,12 @@ public class WeatherBean {
             this.status = status;
         }
 
-        public List<DailyForecastBean> getDaily_forecast() {
-            return daily_forecast;
+        public NowBean getNow() {
+            return now;
         }
 
-        public void setDaily_forecast(List<DailyForecastBean> daily_forecast) {
-            this.daily_forecast = daily_forecast;
+        public void setNow(NowBean now) {
+            this.now = now;
         }
 
         public static class BasicBean {
@@ -167,8 +158,8 @@ public class WeatherBean {
 
         public static class UpdateBean {
             /**
-             * loc : 2018-06-08 15:55
-             * utc : 2018-06-08 07:55
+             * loc : 2018-07-02 14:49
+             * utc : 2018-07-02 06:49
              */
 
             private String loc;
@@ -191,91 +182,67 @@ public class WeatherBean {
             }
         }
 
-        public static class DailyForecastBean {
+        public static class NowBean {
             /**
-             * cond_code_d : 101
-             * cond_code_n : 104
-             * cond_txt_d : 多云
-             * cond_txt_n : 阴
-             * date : 2018-06-08
-             * hum : 79
-             * mr : 01:00
-             * ms : 13:04
-             * pcpn : 2.0
-             * pop : 58
-             * pres : 1009
-             * sr : 04:50
-             * ss : 18:57
-             * tmp_max : 28
-             * tmp_min : 22
-             * uv_index : 3
-             * vis : 20
-             * wind_deg : 88
-             * wind_dir : 东风
-             * wind_sc : 1-2
-             * wind_spd : 4
+             * cloud : 75
+             * cond_code : 104
+             * cond_txt : 阴
+             * fl : 36
+             * hum : 62
+             * pcpn : 0.0
+             * pres : 1000
+             * tmp : 32
+             * vis : 10
+             * wind_deg : 16
+             * wind_dir : 东北风
+             * wind_sc : 1
+             * wind_spd : 5
              */
 
-            private String cond_code_d;
-            private String cond_code_n;
-            private String cond_txt_d;
-            private String cond_txt_n;
-            private String date;
+            private String cloud;
+            private String cond_code;
+            private String cond_txt;
+            private String fl;
             private String hum;
-            private String mr;
-            private String ms;
             private String pcpn;
-            private String pop;
             private String pres;
-            private String sr;
-            private String ss;
-            private String tmp_max;
-            private String tmp_min;
-            private String uv_index;
+            private String tmp;
             private String vis;
             private String wind_deg;
             private String wind_dir;
             private String wind_sc;
             private String wind_spd;
 
-            public String getCond_code_d() {
-                return cond_code_d;
+            public String getCloud() {
+                return cloud;
             }
 
-            public void setCond_code_d(String cond_code_d) {
-                this.cond_code_d = cond_code_d;
+            public void setCloud(String cloud) {
+                this.cloud = cloud;
             }
 
-            public String getCond_code_n() {
-                return cond_code_n;
+            public String getCond_code() {
+                return cond_code;
             }
 
-            public void setCond_code_n(String cond_code_n) {
-                this.cond_code_n = cond_code_n;
+            public void setCond_code(String cond_code) {
+                this.cond_code = cond_code;
             }
 
-            public String getCond_txt_d() {
-                return cond_txt_d;
+            public String getCond_txt() {
+                return cond_txt;
             }
 
-            public void setCond_txt_d(String cond_txt_d) {
-                this.cond_txt_d = cond_txt_d;
+            public void setCond_txt(String cond_txt) {
+                this.cond_txt = cond_txt;
             }
 
-            public String getCond_txt_n() {
-                return cond_txt_n;
+            public String getFl() {
+                return fl;
             }
 
-            public void setCond_txt_n(String cond_txt_n) {
-                this.cond_txt_n = cond_txt_n;
-            }
-
-            public String getDate() {
-                return date;
-            }
-
-            public void setDate(String date) {
-                this.date = date;
+            public void setFl(String fl) {
+                this.fl = fl;
             }
 
             public String getHum() {
@@ -286,36 +253,12 @@ public class WeatherBean {
                 this.hum = hum;
             }
 
-            public String getMr() {
-                return mr;
-            }
-
-            public void setMr(String mr) {
-                this.mr = mr;
-            }
-
-            public String getMs() {
-                return ms;
-            }
-
-            public void setMs(String ms) {
-                this.ms = ms;
-            }
-
             public String getPcpn() {
                 return pcpn;
             }
 
             public void setPcpn(String pcpn) {
                 this.pcpn = pcpn;
-            }
-
-            public String getPop() {
-                return pop;
-            }
-
-            public void setPop(String pop) {
-                this.pop = pop;
             }
 
             public String getPres() {
@@ -326,44 +269,12 @@ public class WeatherBean {
                 this.pres = pres;
             }
 
-            public String getSr() {
-                return sr;
+            public String getTmp() {
+                return tmp;
             }
 
-            public void setSr(String sr) {
-                this.sr = sr;
-            }
-
-            public String getSs() {
-                return ss;
-            }
-
-            public void setSs(String ss) {
-                this.ss = ss;
-            }
-
-            public String getTmp_max() {
-                return tmp_max;
-            }
-
-            public void setTmp_max(String tmp_max) {
-                this.tmp_max = tmp_max;
-            }
-
-            public String getTmp_min() {
-                return tmp_min;
-            }
-
-            public void setTmp_min(String tmp_min) {
-                this.tmp_min = tmp_min;
-            }
-
-            public String getUv_index() {
-                return uv_index;
-            }
-
-            public void setUv_index(String uv_index) {
-                this.uv_index = uv_index;
+            public void setTmp(String tmp) {
+                this.tmp = tmp;
             }
 
             public String getVis() {

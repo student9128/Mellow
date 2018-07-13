@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_1"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/padding_10">
+
+    <ImageView
+        android:id="@+id/iv_lifestyle_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        tools:src="@drawable/ic_index_comf" />
+
+    <TextView
+        android:layout_marginTop="@dimen/margin_10"
+        android:id="@+id/tv_lifestyle_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSize14"
+        android:gravity="center"
+        tools:text="生活指数" />
+
+    <TextView
+        android:id="@+id/tv_lifestyle_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/textSize12"
+        tools:text="适宜" />
+</LinearLayout>

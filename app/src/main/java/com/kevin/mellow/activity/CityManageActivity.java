@@ -10,6 +10,9 @@ import com.kevin.mellow.R;
 import com.kevin.mellow.adapter.CityManageAdapter;
 import com.kevin.mellow.base.BaseActivity;
 import com.kevin.mellow.bean.CityManageBean;
+import com.kevin.mellow.database.CityDataEntity;
+import com.kevin.mellow.database.CityManageEntity;
+import com.kevin.mellow.database.DBManager;
 import com.kevin.mellow.view.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -28,9 +31,10 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
     TextView tvTitle;
     @BindView(R.id.rv_recycler_view)
     RecyclerView rvRecyclerView;
-    private List<CityManageBean> mData = new ArrayList<>();
-    private List<CityManageBean> mDataTemp = new ArrayList<>();
+    private List<CityManageEntity> mData = new ArrayList<>();
+    private List<CityManageEntity> mDataTemp = new ArrayList<>();
     private CityManageAdapter mAdapter;
+    private DBManager dbManager;
 
     @Override
     public int setLayoutResId() {
@@ -44,7 +48,11 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         ivFunction.setImageResource(R.drawable.ic_add);
 
         ivFunction.setOnClickListener(this);
-
+        dbManager = DBManager.getInstance();
+        List<CityManageEntity> cityManageEntities = dbManager.retrieveAllCity();
+        if (cityManageEntities != null) {
+            mData.addAll(cityManageEntities);
+        }
         rvRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
                 LinearLayoutManager.VERTICAL);
@@ -70,11 +78,11 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
         if (RESULT_OK == resultCode) {
             String cityLocation = data.getStringExtra("cityLocation");
-            CityManageBean cityManageBean = new CityManageBean();
+            dbManager.insertCityManage(cityLocation, null, null,null);
+            CityManageEntity cityManageBean = new CityManageEntity();
             cityManageBean.setCityName(cityLocation);
             mDataTemp.add(cityManageBean);
             mAdapter.updateData(mDataTemp);
-
         }
     }
 }

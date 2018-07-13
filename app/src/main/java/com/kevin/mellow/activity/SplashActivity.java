@@ -92,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
                     Log.v("Tag", "省：" + cityInfoBean.getName() + "城市：" + name);
                     String s = Pinyin.toPinyin(name, "");
                     Log.i("Tag", "拼音：" + s);
-                    dbManager.insertData(cityInfoBean.getName(), name, s);
+                    dbManager.insertCityData(cityInfoBean.getName(), name, s);
                 }
 
 
@@ -117,7 +117,7 @@ public class SplashActivity extends AppCompatActivity {
                         Log.v("Tag", "省：" + cityInfoBean.getName() + "城市：" + name);
                         String s = Pinyin.toPinyin(name, "");
                         Log.i("Tag", "拼音：" + s);
-                        dbManager.insertData(cityInfoBean.getName(), name, s);
+                        dbManager.insertCityData(cityInfoBean.getName(), name, s);
                     }
 
                 }

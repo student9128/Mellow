@@ -110,6 +110,15 @@ public interface HttpInterface {
     @GET("s6/weather/now?")
     Observable<Map<String, Object>> getCurrentWeather(@QueryMap Map<String, String> map);
 
+    /**
+     * 获取生活指数
+     * @param map
+     * @return
+     */
+    @Headers("url_name:he_weather")
+    @GET("s6/weather/lifestyle?")
+    Observable<Map<String,Object>> getLifeStyle(@QueryMap Map<String,String> map);
+
 //    @Headers("url_name:dou_ban")
 //    @GET("v2/movie/in_theaters?")
 //    Observable<BaseResponse<DouBanMovieBean>> getDouBanMovie(@QueryMap Map<String, String> map);

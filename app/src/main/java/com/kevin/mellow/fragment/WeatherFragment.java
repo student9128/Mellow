@@ -69,6 +69,7 @@ public class WeatherFragment extends BaseFragment {
     private void initFragments() {
         String currentCity = getStringSp(Constants.LOCATION_CITY);
         mFragments.add(WeatherAreaFragment.newInstance(currentCity));
+        mFragments.add(WeatherAreaFragment.newInstance("北京"));
     }
 
     @Override

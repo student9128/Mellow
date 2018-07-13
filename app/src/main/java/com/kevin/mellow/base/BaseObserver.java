@@ -39,6 +39,11 @@ public abstract class BaseObserver<T> implements Observer<T> {
         this.baseView = baseView;
     }
 
+    /**
+     *
+     * @param baseView
+     * @param tag 必须是唯一，不能相同
+     */
     public BaseObserver(BaseView baseView, String tag) {
         this.baseView = baseView;
         this.key = tag;

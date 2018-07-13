@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.kevin.mellow.R;
 import com.kevin.mellow.bean.CityManageBean;
 import com.kevin.mellow.bean.CitySearchBean;
+import com.kevin.mellow.database.CityDataEntity;
+import com.kevin.mellow.database.CityManageEntity;
 import com.kevin.mellow.listener.OnRecyclerItemClickListener;
 
 import java.util.List;
@@ -27,14 +29,14 @@ import butterknife.ButterKnife;
 public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.MyViewHolder> {
 
     private Context context;
-    private List<CityManageBean> data;
+    private List<CityManageEntity> data;
 
-    public CityManageAdapter(Context context, List<CityManageBean> data) {
+    public CityManageAdapter(Context context, List<CityManageEntity> data) {
         this.context = context;
         this.data = data;
     }
 
-    public void updateData(List<CityManageBean> d) {
+    public void updateData(List<CityManageEntity> d) {
         data.clear();
         data.addAll(d);
         notifyDataSetChanged();
@@ -57,8 +59,8 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        CityManageBean cityManageBean = data.get(position);
-        holder.tvText.setText(cityManageBean.getCityName());
+        CityManageEntity cityManageEntity = data.get(position);
+        holder.tvText.setText(cityManageEntity.getCityName());
         holder.tvText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

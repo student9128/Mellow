@@ -82,4 +82,11 @@ public interface RemoteDataSource {
      * @return
      */
     Observable<Map<String, Object>> requestCurrentWeather(String cityName);
+
+    /**
+     * 获取某个城市的生活指数
+     * @param cityName
+     * @return
+     */
+    Observable<Map<String,Object>> requestCityLifeStyle(String cityName);
 }

@@ -262,5 +262,15 @@ public class RequestDataSource implements RemoteDataSource {
         return AppRetrofit.getInstance().getHttpService().getCurrentWeather(map);
     }
 
+    @Override
+    public Observable<Map<String, Object>> requestCityLifeStyle(String cityName) {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("location", cityName);
+        map.put("key", Constants.WEATHER_KEY);
+        map.put("lang", "cn");
+        map.put("unit", "m");
+        return AppRetrofit.getInstance().getHttpService().getLifeStyle(map);
+    }
+
 
 }

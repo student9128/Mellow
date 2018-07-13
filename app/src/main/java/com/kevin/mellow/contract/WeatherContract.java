@@ -2,6 +2,8 @@ package com.kevin.mellow.contract;
 
 import com.kevin.mellow.base.BasePresenter;
 import com.kevin.mellow.base.BaseView;
+import com.kevin.mellow.bean.CityCurrentWeatherBean;
+import com.kevin.mellow.bean.CityLifeStyleBean;
 import com.kevin.mellow.bean.WeatherBean;
 
 /**
@@ -15,8 +17,22 @@ public class WeatherContract {
         void showTips(String msg);
 
         void showData(WeatherBean.HeWeather6Bean data);
+
+        void showCurrentWeather(CityCurrentWeatherBean.HeWeather6Bean data);
+
+        void showLifeStyle(CityLifeStyleBean.HeWeather6Bean data);
+
+        /**
+         * 请求数据完成
+         */
+        void requestFinished();
     }
+
     public interface Presenter extends BasePresenter {
         void requestData(String cityName);
+
+        void requestCurrentWeather(String cityName);
+
+        void requestLifeStyle(String cityName);
     }
 }

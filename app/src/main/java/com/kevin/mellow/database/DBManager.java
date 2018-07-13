@@ -21,6 +21,7 @@ public class DBManager {
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
     private CityDataEntityDao mDataEntityDao;
+    private CityManageEntityDao mCityManageEntityDao;
 
     public static DBManager getInstance() {
         if (mInstance == null) {
@@ -36,19 +37,20 @@ public class DBManager {
         mDaoMaster = new DaoMaster(mDevOpenHelper.getWritableDb());
         mDaoSession = mDaoMaster.newSession();
         mDataEntityDao = mDaoSession.getCityDataEntityDao();
+        mCityManageEntityDao = mDaoSession.getCityManageEntityDao();
     }
 
-    public void insertData(String province, String city, String cityPinyin) {
+    public void insertCityData(String province, String city, String cityPinyin) {
         CityDataEntity dataEntity = new CityDataEntity(null, province, city, cityPinyin);
         mDataEntityDao.insert(dataEntity);
     }
 
-    public void update(String province, String city, String cityPinyin) {
+    public void updateCity(String province, String city, String cityPinyin) {
         CityDataEntity dataEntity = new CityDataEntity(null, province, city, cityPinyin);
         mDataEntityDao.update(dataEntity);
     }
 
-    public void delete(String province, String city, String cityPinyin) {
+    public void deleteCity(String province, String city, String cityPinyin) {
         CityDataEntity dataEntity = new CityDataEntity(null, province, city, cityPinyin);
         mDataEntityDao.delete(dataEntity);
     }
@@ -57,12 +59,52 @@ public class DBManager {
         mDataEntityDao.deleteAll();
     }
 
+
     public List<CityDataEntity> retrieveAll() {
 
         List<CityDataEntity> list = mDataEntityDao.queryBuilder().build().list();
         CityComparator comparator = new CityComparator();
-        Collections.sort(list,comparator);
+        Collections.sort(list, comparator);
         return list;
     }
+
+    /**
+     * 城市管理栏目：添加城市
+     * @param cityName
+     * @param weather
+     * @param temperature
+     * @param weatherIcon
+     */
+    public void insertCityManage(String cityName, String weather, String temperature,String weatherIcon) {
+        CityManageEntity cityManageEntity = new CityManageEntity(null, cityName, weather,
+                temperature,weatherIcon);
+        mCityManageEntityDao.insert(cityManageEntity);
+    }
+
+    public void updateCityManage(String cityName, String weather, String temperature,String weatherIcon) {
+        CityManageEntity cityManageEntity = new CityManageEntity(null, cityName, weather,
+                temperature,weatherIcon);
+        mCityManageEntityDao.update(cityManageEntity);
+    }
+
+    public void deleteCityManage(String cityName, String weather, String temperature,String weatherIcon) {
+        CityManageEntity cityManageEntity = new CityManageEntity(null, cityName, weather,
+                temperature,weatherIcon);
+        mCityManageEntityDao.delete(cityManageEntity);
+    }
+
+    public void clearManageData() {
+        mCityManageEntityDao.deleteAll();
+    }
+
+    /**
+     * 获取城市管理中的所有城市
+     * @return
+     */
+    public List<CityManageEntity> retrieveAllCity() {
+        List<CityManageEntity> list = mCityManageEntityDao.queryBuilder().build().list();
+        return list;
+    }
+
 
 }
