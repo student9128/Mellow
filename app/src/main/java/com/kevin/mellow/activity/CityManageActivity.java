@@ -3,9 +3,11 @@ package com.kevin.mellow.activity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.kevin.mellow.MainActivity;
 import com.kevin.mellow.R;
 import com.kevin.mellow.adapter.CityManageAdapter;
 import com.kevin.mellow.base.BaseActivity;
@@ -26,7 +28,8 @@ import butterknife.BindView;
  * Describe:
  * <h3/>
  */
-public class CityManageActivity extends BaseActivity implements View.OnClickListener {
+public class CityManageActivity extends BaseActivity implements View.OnClickListener,
+        CityManageAdapter.OnCityItemClickListener {
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.rv_recycler_view)
@@ -43,14 +46,31 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initView() {
+        Intent intent = getIntent();
+        String locationCity = intent.getStringExtra("locationCity");
         actionBar.setTitle(getString(R.string.city_manage));
         ivFunction.setVisibility(View.VISIBLE);
         ivFunction.setImageResource(R.drawable.ic_add);
 
         ivFunction.setOnClickListener(this);
         dbManager = DBManager.getInstance();
+        if (!TextUtils.isEmpty(locationCity)) {
+            CityManageEntity cityManageEntity = new CityManageEntity(null, locationCity, null,
+                    null, null);
+            mData.add(0, cityManageEntity);
+            if (!dbManager.isExistsByName(locationCity)) {
+                dbManager.insertCityManage(locationCity, null, null, null);
+            }
+        }
         List<CityManageEntity> cityManageEntities = dbManager.retrieveAllCity();
         if (cityManageEntities != null) {
+            for (int i = 0; i < cityManageEntities.size(); i++) {
+                CityManageEntity cityManageEntity = cityManageEntities.get(i);
+
+                if (cityManageEntity.getCityName().equals(locationCity)) {
+                    cityManageEntities.remove(i);
+                }
+            }
             mData.addAll(cityManageEntities);
         }
         rvRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -60,6 +80,9 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
         rvRecyclerView.addItemDecoration(dividerItemDecoration);
         mAdapter = new CityManageAdapter(this, mData);
         rvRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnCityItemClickListener(this);
+        mAdapter.setOnCityItemDeleteListener(this);
     }
 
     @Override
@@ -68,21 +91,44 @@ public class CityManageActivity extends BaseActivity implements View.OnClickList
             case R.id.iv_function:
 //                startNewActivity(CitySearchActivity.class);
                 Intent intent = new Intent(this, CitySearchActivity.class);
-                startActivityForResult(intent, 0);
+                startActivity(intent);
                 break;
         }
     }
 
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (RESULT_OK == resultCode) {
+//            String cityLocation = data.getStringExtra("cityLocation");
+//            if (dbManager.isExistsByName(cityLocation)) {
+//                showToast("已添加");
+//                return;
+//            }
+//            dbManager.insertCityManage(cityLocation, null, null, null);
+//            CityManageEntity cityManageBean = new CityManageEntity();
+//            cityManageBean.setCityName(cityLocation);
+//            mAdapter.updateData(cityManageBean);
+//        }
+//    }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (RESULT_OK == resultCode) {
-            String cityLocation = data.getStringExtra("cityLocation");
-            dbManager.insertCityManage(cityLocation, null, null,null);
-            CityManageEntity cityManageBean = new CityManageEntity();
-            cityManageBean.setCityName(cityLocation);
-            mDataTemp.add(cityManageBean);
-            mAdapter.updateData(mDataTemp);
-        }
+    public void onCityItemClick(int position) {
+//        CityManageEntity cityManageEntity = mData.get(position);
+//        String cityName = cityManageEntity.getCityName();
+//        Intent intent = new Intent(this, MainActivity.class);
+//        intent.putExtra("showCityName", cityName);
+//        setResult(RESULT_OK, intent);
+//        finish();
+
+    }
+
+    @Override
+    public void onCityDeleteClick(int position) {
+        CityManageEntity cityManageEntity = mData.get(position);
+        String cityName = cityManageEntity.getCityName();
+        dbManager.deleteCityManage(cityName);
+        printLogd(position + "");
+        mAdapter.deleteData(position);
     }
 }

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kevin.mellow.R;
@@ -36,12 +37,16 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
         this.data = data;
     }
 
-    public void updateData(List<CityManageEntity> d) {
-        data.clear();
-        data.addAll(d);
-        notifyDataSetChanged();
+    public void updateData(CityManageEntity d) {
+        data.add(d);
+        notifyItemInserted(data.size());
     }
 
+    public void deleteData(int position){
+        data.remove(position);
+        notifyDataSetChanged();
+//        notifyItemRemoved(position);
+    }
     public void clearData() {
         data.clear();
         notifyDataSetChanged();
@@ -51,7 +56,7 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int
             viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.adapter_city_search, parent,
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_city_manage, parent,
                 false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
@@ -61,12 +66,25 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         CityManageEntity cityManageEntity = data.get(position);
         holder.tvText.setText(cityManageEntity.getCityName());
+        if (position == 0) {
+//            holder.ivDelete.setVisibility(View.GONE);
+            holder.ivDelete.setImageResource(R.drawable.ic_location);
+            holder.ivDelete.setEnabled(false);
+        }
         holder.tvText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (listener != null) {
-                    listener.onRecyclerItemClick(position);
+                    listener.onCityItemClick(position);
+                }
+            }
+        });
+        holder.ivDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (deleteListener != null) {
+                    deleteListener.onCityDeleteClick(position);
                 }
             }
         });
@@ -80,6 +98,8 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_text)
         TextView tvText;
+        @BindView(R.id.iv_delete)
+        ImageView ivDelete;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -87,10 +107,22 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
         }
     }
 
-    private OnRecyclerItemClickListener listener;
+    private OnCityItemClickListener listener;
+    private OnCityItemClickListener deleteListener;
 
-    public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener l) {
+    public void setOnCityItemClickListener(OnCityItemClickListener l) {
         this.listener = l;
     }
 
+    public void setOnCityItemDeleteListener(OnCityItemClickListener l){
+        deleteListener = l;
+    }
+
+    public interface OnCityItemClickListener {
+        void onCityItemClick(int position);
+
+        //        void onCityItemLongClick();
+        void onCityDeleteClick(int position);
+
+    }
 }

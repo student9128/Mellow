@@ -35,4 +35,13 @@ public class Constants {
      * 区
      */
     public static final String LOCATION_DISTRICT = "district";
+
+    public static final String KEY_CITY_NAME = "cityName";
+    public static final String KEY_WEATHER = "weather";
+    public static final String KEY_TEMPERATURE = "temperature";
+    public static final String KEY_WIND = "wind";
+    public static final String KEY_LIFESTYLE_NAME = "lifestyleName";
+    public static final String KEY_LIFESTYLE_BRF = "lifestyleBrf";
+    public static final String KEY_LIFESTYLE_TEXT = "lifestyleText";
+
 }

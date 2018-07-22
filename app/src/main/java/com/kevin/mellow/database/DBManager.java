@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.kevin.mellow.base.BaseApplication;
 import com.kevin.mellow.utils.CityComparator;
+import com.kevin.mellow.utils.LogK;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +26,9 @@ public class DBManager {
 
     public static DBManager getInstance() {
         if (mInstance == null) {
+            synchronized (DBManager.class) {
             mInstance = new DBManager();
+            }
 
         }
         return mInstance;
@@ -87,10 +90,14 @@ public class DBManager {
         mCityManageEntityDao.update(cityManageEntity);
     }
 
-    public void deleteCityManage(String cityName, String weather, String temperature,String weatherIcon) {
-        CityManageEntity cityManageEntity = new CityManageEntity(null, cityName, weather,
-                temperature,weatherIcon);
-        mCityManageEntityDao.delete(cityManageEntity);
+    public void deleteCityManage(String cityName) {
+//        CityManageEntity cityManageEntity = new CityManageEntity(1l, cityName, weather,
+//                temperature,weatherIcon);
+//        boolean b = mCityManageEntityDao.hasKey(cityManageEntity);
+//        LogK.d("DB",b+"");
+//        mCityManageEntityDao.delete(cityManageEntity);
+        String sql = "delete from " + CityManageEntityDao.TABLENAME + " where CITY_NAME='" + cityName + "'";
+        mDaoSession.getDatabase().execSQL(sql);
     }
 
     public void clearManageData() {
@@ -104,6 +111,18 @@ public class DBManager {
     public List<CityManageEntity> retrieveAllCity() {
         List<CityManageEntity> list = mCityManageEntityDao.queryBuilder().build().list();
         return list;
+    }
+
+    public boolean isExistsByName(String cityName) {
+        List<CityManageEntity> cityManageEntities = mCityManageEntityDao.queryRaw("where " +
+                "CITY_NAME=?", cityName);
+        if (cityManageEntities != null && cityManageEntities.size() > 0) {
+            CityManageEntity cityManageEntity = cityManageEntities.get(0);
+            String name = cityManageEntity.getCityName();
+            LogK.d("DBMANAGER",name);
+            return true;
+        }
+        return false;
     }
 
 

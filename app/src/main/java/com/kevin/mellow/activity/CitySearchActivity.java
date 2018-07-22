@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.kevin.mellow.MainActivity;
 import com.kevin.mellow.R;
 import com.kevin.mellow.adapter.CitySearchAdapter;
 import com.kevin.mellow.base.BaseActivity;
@@ -151,9 +152,12 @@ public class CitySearchActivity extends BaseActivity implements CitySearchContra
     public void onRecyclerItemClick(int position) {
         CitySearchBean.HeWeather6Bean.BasicBean basicBean = mData.get(position);
         String location = basicBean.getLocation();
-        Intent intent = new Intent(this, CityManageActivity.class);
-        intent.putExtra("cityLocation", location);
-        setResult(RESULT_OK, intent);
+        Intent intent = new Intent(this, MainActivity.class);
+//        intent.putExtra("cityLocation", location);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("weatherCityName", location);
+//        setResult(RESULT_OK, intent);
+        startActivity(intent);
         finish();
     }
 }

@@ -372,4 +372,32 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         centerWeatherFragment.onOptionsItemSelected(item);
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);//解决singleTask无法接收到intent的传值
+    }
+
+//    @Override
+//    protected void onResume() {
+//        /**
+//         * 获取要显示天气预报的城市的名字
+//         */
+//        String showCityName = getIntent().getStringExtra("weatherCityName");
+//        if (!TextUtils.isEmpty(showCityName)) {
+//            if (centerWeatherFragment == null) {
+//                centerWeatherFragment = WeatherFragment.newInstance(getString(R.string
+//                        .center_weather));
+//            }
+//            tvTitle.setVisibility(View.GONE);
+//            ivArrowDown.setVisibility(View.GONE);
+//            switchFragment(centerWeatherFragment);
+//            actionBar.setTitle(getString(R.string.center_weather));
+//            Intent intent = new Intent();
+//            intent.setClass(MainActivity.this, WeatherFragment.class);
+//            intent.putExtra("showCityName", showCityName);
+//        }
+//        super.onResume();
+//    }
 }

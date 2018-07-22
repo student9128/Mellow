@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kevin.mellow.R;
@@ -62,7 +63,7 @@ public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.My
         String parentCity = basicBean.getParent_city();
         String cnty = basicBean.getCnty();
         holder.tvText.setText(location + "," + parentCity + "," + cnty);
-        holder.tvText.setOnClickListener(new View.OnClickListener() {
+        holder.llContaienr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
@@ -81,6 +82,8 @@ public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_text)
         TextView tvText;
+        @BindView(R.id.ll_container)
+        LinearLayout llContaienr;
 
         public MyViewHolder(View itemView) {
             super(itemView);

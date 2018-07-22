@@ -59,6 +59,7 @@
     <dimen name="textSize18">18sp</dimen>
     <dimen name="textSize20">20sp</dimen>
     <dimen name="textSize24">24sp</dimen>
+    <dimen name="textSize30">30sp</dimen>
     <dimen name="textSize36">36sp</dimen>
     <dimen name="textSize50">50sp</dimen>
     <dimen name="textSize80">80sp</dimen>

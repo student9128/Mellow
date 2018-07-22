@@ -7,10 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kevin.mellow.R;
 import com.kevin.mellow.bean.CityLifeStyleBean;
+import com.kevin.mellow.listener.OnRecyclerItemClickListener;
+import com.kevin.mellow.utils.LifestyleUtils;
 
 import java.util.List;
 
@@ -53,12 +56,20 @@ public class DailyLifeStyleAdapter extends RecyclerView.Adapter<DailyLifeStyleAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         CityLifeStyleBean.HeWeather6Bean.LifestyleBean lifestyleBean = data.get(position);
         String type = lifestyleBean.getType();
-        holder.ivLifestyleIcon.setImageResource(getLifeStyleIcon(type));
-        holder.tvLifestyleName.setText(getLifeStyleName(type));
+        holder.ivLifestyleIcon.setImageResource(LifestyleUtils.getLifeStyleIcon(type));
+        holder.tvLifestyleName.setText(LifestyleUtils.getLifeStyleName(type));
         holder.tvLifestyleValue.setText(lifestyleBean.getBrf());
+        holder.llLifestyleContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onRecyclerItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -73,6 +84,8 @@ public class DailyLifeStyleAdapter extends RecyclerView.Adapter<DailyLifeStyleAd
         TextView tvLifestyleValue;
         @BindView(R.id.iv_lifestyle_icon)
         ImageView ivLifestyleIcon;
+        @BindView(R.id.ll_lifestyle_container)
+        LinearLayout llLifestyleContainer;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -80,65 +93,11 @@ public class DailyLifeStyleAdapter extends RecyclerView.Adapter<DailyLifeStyleAd
         }
     }
 
-    private String getLifeStyleName(String name) {
-        String x = "";
-        switch (name) {
-            case "comf":
-                x = "舒适度指数";
-                break;
-            case "drsg":
-                x = "穿衣指数";
-                break;
-            case "flu":
-                x = "感冒指数";
-                break;
-            case "sport":
-                x = "运动指数";
-                break;
-            case "trav":
-                x = "旅游指数";
-                break;
-            case "uv":
-                x = "紫外线指数";
-                break;
-            case "cw":
-                x = "洗车指数";
-                break;
-            case "air":
-                x = "空气污染扩散条件指数";
-                break;
-        }
-        return x;
-    }
 
-    private int getLifeStyleIcon(String name) {
-        int i = -1;
-        switch (name) {
-            case "comf":
-                i = R.drawable.ic_index_comf;
-                break;
-            case "drsg":
-                i = R.drawable.ic_index_drsg;
-                break;
-            case "flu":
-                i = R.drawable.ic_index_flu;
-                break;
-            case "sport":
-                i = R.drawable.ic_index_sport;
-                break;
-            case "trav":
-                i = R.drawable.ic_index_trav;
-                break;
-            case "uv":
-                i = R.drawable.ic_index_uv;
-                break;
-            case "cw":
-                i = R.drawable.ic_index_cw;
-                break;
-            case "air":
-                i = R.drawable.ic_index_air;
-                break;
-        }
-        return i;
+
+    private OnRecyclerItemClickListener listener;
+
+    public void setOnLifeStyleClickListener(OnRecyclerItemClickListener l) {
+        listener = l;
     }
 }

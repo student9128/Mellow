@@ -1,5 +1,6 @@
 package com.kevin.mellow.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kevin.mellow.R;
+import com.kevin.mellow.activity.LifestyleActivity;
 import com.kevin.mellow.adapter.DailyForecastAdapter;
 import com.kevin.mellow.adapter.DailyLifeStyleAdapter;
 import com.kevin.mellow.base.BaseFragment;
@@ -21,6 +23,7 @@ import com.kevin.mellow.bean.WeatherBean;
 import com.kevin.mellow.constant.Constants;
 import com.kevin.mellow.contract.WeatherContract;
 import com.kevin.mellow.data.source.RequestDataSource;
+import com.kevin.mellow.listener.OnRecyclerItemClickListener;
 import com.kevin.mellow.presenter.WeatherPresenter;
 
 import java.util.ArrayList;
@@ -37,7 +40,7 @@ import butterknife.Unbinder;
  * <h3/>
  */
 public class WeatherAreaFragment extends BaseFragment implements WeatherContract.View,
-        SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout.OnRefreshListener, OnRecyclerItemClickListener {
 
     @BindView(R.id.tv_current_city_name)
     TextView tvCurrentCityName;
@@ -104,6 +107,7 @@ public class WeatherAreaFragment extends BaseFragment implements WeatherContract
     @Override
     public void initListener() {
         srlRefresh.setOnRefreshListener(this);
+        mDailyLifeStyleAdapter.setOnLifeStyleClickListener(this);
     }
 
     @Override
@@ -197,5 +201,24 @@ public class WeatherAreaFragment extends BaseFragment implements WeatherContract
     @Override
     public void onRefresh() {
         requestLoad();
+    }
+
+    @Override
+    public void onRecyclerItemClick(int position) {
+        CityLifeStyleBean.HeWeather6Bean.LifestyleBean lifestyleBean = mLifeStyleData.get(position);
+        Intent intent = new Intent(mActivity, LifestyleActivity.class);
+        Bundle bundle = new Bundle();
+        String s = tvCurrentWeather.getText().toString();
+        printLogd(s);
+        bundle.putString(Constants.KEY_CITY_NAME, cityName);
+        bundle.putString(Constants.KEY_WEATHER,tvCurrentWeather.getText().toString());
+        bundle.putString(Constants.KEY_TEMPERATURE, tvCurrentTemp.getText().toString());
+        bundle.putString(Constants.KEY_WIND,tvCurrentWind.getText().toString());
+        bundle.putString(Constants.KEY_LIFESTYLE_NAME,lifestyleBean.getType());
+        bundle.putString(Constants.KEY_LIFESTYLE_BRF,lifestyleBean.getBrf());
+        bundle.putString(Constants.KEY_LIFESTYLE_TEXT,lifestyleBean.getTxt());
+        intent.putExtra("lifestyle", bundle);
+        startActivity(intent,bundle);
+
     }
 }
