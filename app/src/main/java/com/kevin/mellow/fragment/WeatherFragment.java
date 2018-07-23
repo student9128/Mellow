@@ -15,17 +15,22 @@ import com.kevin.mellow.R;
 import com.kevin.mellow.activity.CityManageActivity;
 import com.kevin.mellow.adapter.WeatherAdapter;
 import com.kevin.mellow.base.BaseFragment;
+import com.kevin.mellow.bean.CityCurrentWeatherBean;
+import com.kevin.mellow.bean.CityLifeStyleBean;
+import com.kevin.mellow.bean.WeatherBean;
 import com.kevin.mellow.constant.Constants;
 import com.kevin.mellow.contract.WeatherContract;
 import com.kevin.mellow.data.source.RequestDataSource;
 import com.kevin.mellow.database.CityManageEntity;
 import com.kevin.mellow.database.DBManager;
 import com.kevin.mellow.presenter.WeatherPresenter;
+import com.kevin.mellow.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -37,7 +42,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 
-public class WeatherFragment extends BaseFragment {
+public class WeatherFragment extends BaseFragment implements WeatherContract.View {
 
     @BindView(R.id.vp_view_pager)
     ViewPager vpViewPager;
@@ -54,6 +59,10 @@ public class WeatherFragment extends BaseFragment {
     private List<Fragment> fragmentData = new ArrayList<>();
     private List<String> cityListTemp = new ArrayList<>();
 
+    private WeatherContract.Presenter mPresenter;
+    //    private StringBuffer str = new StringBuffer();
+    private List<WeatherBean.HeWeather6Bean.DailyForecastBean> mData = new ArrayList<>();
+
     public static WeatherFragment newInstance(String s) {
         WeatherFragment fragment = new WeatherFragment();
         Bundle bundle = new Bundle();
@@ -66,6 +75,7 @@ public class WeatherFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mPresenter = new WeatherPresenter(this, RequestDataSource.getInstance());
     }
 
     @Override
@@ -157,7 +167,7 @@ public class WeatherFragment extends BaseFragment {
                 weatherCityList.add(showCityName);
                 mFragments.add(WeatherAreaFragment.newInstance(showCityName));
                 if (!dbManager.isExistsByName(showCityName)) {
-                dbManager.insertCityManage(showCityName, null, null, null);
+                    dbManager.insertCityManage(showCityName, null, null, null);
                 }
                 mAdapter.upDateFragment(mFragments);
                 vpViewPager.setCurrentItem(weatherCityList.size() - 1);
@@ -195,7 +205,27 @@ public class WeatherFragment extends BaseFragment {
 //                showToast("分享");
                 int currentItem = vpViewPager.getCurrentItem();
                 String s = weatherCityList.get(currentItem);
-                showToast(s);
+                mPresenter.requestData(s);
+                StringBuffer str = new StringBuffer();
+                str.append(weatherCityList.get(vpViewPager.getCurrentItem()) + "天气预报：\n");
+                if (mData.size() > 0) {
+                    for (int i = 0; i < mData.size(); i++) {
+                        String week = DateUtils.theDay(mData.get(i).getDate());
+                        String tmpMax = mData.get(i).getTmp_max();
+                        String tmpMin = mData.get(i).getTmp_min();
+                        String condTxtD = mData.get(i).getCond_txt_d();
+                        String condTxtN = mData.get(i).getCond_txt_n();
+                        str.append(week + ":");
+                        str.append(DateUtils.isNight() ? condTxtN : condTxtD + ",");
+                        str.append(tmpMax + "~" + tmpMin + "℃ \n");
+                    }
+                    Intent textIntent = new Intent(Intent.ACTION_SEND);
+                    textIntent.setType("text/plain");
+                    textIntent.putExtra(Intent.EXTRA_TEXT, str.toString());
+                    startActivity(Intent.createChooser(textIntent, "分享到"));
+                } else {
+                    showToast("正在获取数据...");
+                }
                 break;
             case R.id.action_city_manage:
                 Intent intent = new Intent(mActivity, CityManageActivity.class);
@@ -216,4 +246,86 @@ public class WeatherFragment extends BaseFragment {
 //
 //        }
 //    }
+
+
+    private void showShare() {
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // title标题，微信、QQ和QQ空间等平台使用
+        oks.setTitle("分享");
+        // titleUrl QQ和QQ空间跳转链接
+        oks.setTitleUrl("http://sharesdk.cn");
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText("我是分享文本");
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url在微信、微博，Facebook等平台中使用
+        oks.setUrl("http://sharesdk.cn");
+        // comment是我对这条分享的评论，仅在人人网使用
+        oks.setComment("我是测试评论文本");
+        // 启动分享GUI
+        oks.show(mActivity);
+    }
+
+    @Override
+    public void showTips(String msg) {
+
+    }
+
+    @Override
+    public void showData(WeatherBean.HeWeather6Bean data) {
+
+    }
+
+    @Override
+    public void showCurrentWeather(CityCurrentWeatherBean.HeWeather6Bean data) {
+
+    }
+
+    @Override
+    public void showLifeStyle(CityLifeStyleBean.HeWeather6Bean data) {
+
+    }
+
+    @Override
+    public void requestFinished() {
+
+    }
+
+    @Override
+    public void shareWeather(WeatherBean.HeWeather6Bean data) {
+        String status = data.getStatus();
+        if ("ok".equals(status)) {
+            WeatherBean.HeWeather6Bean.BasicBean basic = data.getBasic();
+            List<WeatherBean.HeWeather6Bean.DailyForecastBean> dailyForecast = data
+                    .getDaily_forecast();
+            mData.clear();
+            mData.addAll(dailyForecast);
+
+        } else {
+//            showToast(status);
+        }
+    }
+
+    @Override
+    public void showProgressDialog() {
+        showLoadingDialog();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        dismissProgressDialog();
+    }
+
+    @Override
+    public void setPresenter(WeatherContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public String getUniqueTag() {
+        return getUniqueTag();
+    }
 }

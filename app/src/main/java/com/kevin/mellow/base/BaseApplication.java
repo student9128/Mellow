@@ -12,6 +12,7 @@ import android.text.TextUtils;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.kevin.mellow.service.LocationService;
+import com.mob.MobSDK;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class BaseApplication extends Application {
     public static LocationService getLocationService() {
         return mLocationService;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -46,6 +48,7 @@ public class BaseApplication extends Application {
         SDKInitializer.initialize(getApplicationContext());//百度地图初始化
         mLocationService = LocationService.getInstance(getApplicationContext());
         LeakCanary.install(this);
+        MobSDK.init(this);
     }
 
     private void initLifecycle() {

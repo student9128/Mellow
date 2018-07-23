@@ -42,7 +42,7 @@
 
 
 -keep class com.baidu.** {*;}
-#-keep class mapsdkvi.com.** {*;}
+-keep class mapsdkvi.com.** {*;}
 -dontwarn com.baidu.**
 
 -keep class com.kevin.mellow.bean.** {*;}
@@ -110,3 +110,15 @@ public static java.lang.String TABLENAME;
 #排除HeWeather
   -dontwarn interfaces.heweather.com.interfacesmodule.**
   -keep class interfaces.heweather.com.interfacesmodule.** { *;}
+
+#Mob分享#
+-keep class cn.sharesdk.**{*;}
+-keep class com.sina.**{*;}
+-keep class **.R$* {*;}
+-keep class **.R{*;}
+-keep class com.mob.**{*;}
+-keep class m.framework.**{*;}
+-dontwarn cn.sharesdk.**
+-dontwarn com.sina.**
+-dontwarn com.mob.**
+-dontwarn **.R$*

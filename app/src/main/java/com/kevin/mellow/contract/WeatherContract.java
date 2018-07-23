@@ -26,6 +26,13 @@ public class WeatherContract {
          * 请求数据完成
          */
         void requestFinished();
+
+        /**
+         * 将天气预报进行分享
+         * @param data
+         * @return
+         */
+        void shareWeather(WeatherBean.HeWeather6Bean data);
     }
 
     public interface Presenter extends BasePresenter {

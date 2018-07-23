@@ -52,6 +52,7 @@ public class WeatherPresenter implements WeatherContract.Presenter {
                         WeatherBean.HeWeather6Bean heWeather6Bean = weatherBean.getHeWeather6()
                                 .get(0);
                         view.showData(heWeather6Bean);
+                        view.shareWeather(heWeather6Bean);
                     }
                     @Override
                     public void onError(Throwable e) {
