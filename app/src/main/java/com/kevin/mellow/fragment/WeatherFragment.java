@@ -89,6 +89,13 @@ public class WeatherFragment extends BaseFragment {
             mFragments.add(WeatherAreaFragment.newInstance(currentCity));
             weatherCityList.add(currentCity);
 //            mFragments.add(WeatherAreaFragment.newInstance("北京"));
+        } else {
+            currentCity = "定位失败";
+            mFragments.add(WeatherAreaFragment.newInstance(currentCity));
+            weatherCityList.add(currentCity);
+        }
+        if (!dbManager.isExistsByName(currentCity)) {
+            dbManager.insertCityManage(currentCity, null, null, null);
         }
         List<CityManageEntity> cityManageEntities = dbManager.retrieveAllCity();
         if (cityManageEntities != null) {
@@ -125,14 +132,14 @@ public class WeatherFragment extends BaseFragment {
                 }
             }
 
-                for (int j = 0; j < weatherCityList.size(); j++) {
-                    //通过一个集合来判断是不是数据里的的数据包含weatherCityList的数据
-                    if (cityListTemp.contains(weatherCityList.get(j))) {
-                        mFragments.add(WeatherAreaFragment.newInstance(weatherCityList.get(j)));
-                    } else {
-                        weatherCityList.remove(j);
-                        j--;
-                    }
+            for (int j = 0; j < weatherCityList.size(); j++) {
+                //通过一个集合来判断是不是数据里的的数据包含weatherCityList的数据
+                if (cityListTemp.contains(weatherCityList.get(j))) {
+                    mFragments.add(WeatherAreaFragment.newInstance(weatherCityList.get(j)));
+                } else {
+                    weatherCityList.remove(j);
+                    j--;
+                }
             }
         }
         mAdapter.upDateFragment(mFragments);
@@ -149,7 +156,9 @@ public class WeatherFragment extends BaseFragment {
             } else {
                 weatherCityList.add(showCityName);
                 mFragments.add(WeatherAreaFragment.newInstance(showCityName));
+                if (!dbManager.isExistsByName(showCityName)) {
                 dbManager.insertCityManage(showCityName, null, null, null);
+                }
                 mAdapter.upDateFragment(mFragments);
                 vpViewPager.setCurrentItem(weatherCityList.size() - 1);
             }
@@ -183,7 +192,10 @@ public class WeatherFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
-                showToast("分享");
+//                showToast("分享");
+                int currentItem = vpViewPager.getCurrentItem();
+                String s = weatherCityList.get(currentItem);
+                showToast(s);
                 break;
             case R.id.action_city_manage:
                 Intent intent = new Intent(mActivity, CityManageActivity.class);

@@ -116,9 +116,14 @@ public class WeatherAreaFragment extends BaseFragment implements WeatherContract
     }
 
     private void requestLoad() {
-        mPresenter.requestData(cityName);
-        mPresenter.requestCurrentWeather(cityName);
-        mPresenter.requestLifeStyle(cityName);
+        if (cityName != "定位失败") {
+            mPresenter.requestData(cityName);
+            mPresenter.requestCurrentWeather(cityName);
+            mPresenter.requestLifeStyle(cityName);
+        } else {
+            showToast("定位失败");
+            srlRefresh.setRefreshing(false);
+        }
     }
 
     @Override

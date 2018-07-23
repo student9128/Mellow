@@ -53,6 +53,11 @@ public class WeatherPresenter implements WeatherContract.Presenter {
                                 .get(0);
                         view.showData(heWeather6Bean);
                     }
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.requestFinished();
+                    }
                 });
 
     }
@@ -76,6 +81,11 @@ public class WeatherPresenter implements WeatherContract.Presenter {
                                 cityCurrentWeatherBean.getHeWeather6().get(0);
                         view.showCurrentWeather(heWeather6Bean);
                     }
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.requestFinished();
+                    }
                 });
     }
 
@@ -97,6 +107,12 @@ public class WeatherPresenter implements WeatherContract.Presenter {
                         CityLifeStyleBean.HeWeather6Bean heWeather6Bean = cityLifeStyleBean
                                 .getHeWeather6().get(0);
                         view.showLifeStyle(heWeather6Bean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.requestFinished();
                     }
 
                     @Override
