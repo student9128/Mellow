@@ -2,9 +2,12 @@
 <resources>
     <!--<color name="colorPrimary">#2196F3</color>-->
     <!--<color name="colorPrimaryDark">#2196F3</color>-->
-    <color name="colorAccent">#217C98</color>
-    <color name="colorPrimary">#217C98</color>
-    <color name="colorPrimaryDark">#217C98</color>
+    <!--<color name="colorAccent">#217C98</color>-->
+    <!--<color name="colorPrimary">#217C98</color>-->
+    <!--<color name="colorPrimaryDark">#217C98</color>-->
+    <color name="colorAccent">#ff9a3c</color>
+    <color name="colorPrimary">#ff9a3c</color>
+    <color name="colorPrimaryDark">#ff9a3c</color>
 
     <color name="mapColor">#20FF5252</color>
     <color name="white">#ffffff</color>

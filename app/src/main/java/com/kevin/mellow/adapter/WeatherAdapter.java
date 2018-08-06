@@ -47,6 +47,7 @@ public class WeatherAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getItemPosition(@NonNull Object object) {
+
         return PagerAdapter.POSITION_NONE;
     }
 }

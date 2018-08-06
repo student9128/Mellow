@@ -69,6 +69,7 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.My
         if (position == 0) {
 //            holder.ivDelete.setVisibility(View.GONE);
             holder.ivDelete.setImageResource(R.drawable.ic_location);
+            holder.ivDelete.setColorFilter(R.color.colorPrimary);
             holder.ivDelete.setEnabled(false);
         }
         holder.tvText.setOnClickListener(new View.OnClickListener() {
