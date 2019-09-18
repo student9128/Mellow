@@ -23,7 +23,6 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-
     public void login(String account, String password) {
         //可以在这里进行账号密码校验
 //        if (TextUtils.isEmpty(account) && TextUtils.isEmpty(password)) {

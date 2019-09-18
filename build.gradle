@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
         classpath 'com.mob.sdk:MobSDK:2018.0319.1724'
         
@@ -23,6 +23,7 @@ allprojects {
         jcenter()
 //        mavenCentral()
     }
+    configurations.all {exclude group: 'com.android.support', module: 'support-v4'}
 }
 
 task clean(type: Delete) {
