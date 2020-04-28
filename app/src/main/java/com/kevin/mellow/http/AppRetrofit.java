@@ -145,7 +145,9 @@ public class AppRetrofit {
     public static AppRetrofit getInstance() {
         if (appRetrofit == null) {
             synchronized (AppRetrofit.class) {
-                appRetrofit = new AppRetrofit();
+                if (appRetrofit == null) {
+                    appRetrofit = new AppRetrofit();
+                }
             }
         }
         return appRetrofit;
