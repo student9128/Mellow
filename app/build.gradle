@@ -54,7 +54,7 @@ def RELEASE_KEY_PASSWORD = ''
 def RELEASE_KEY_ALIAS = ''
 def RELEASE_STORE_PASSWORD = ''
 // default keystore file, PLZ config file path in local.properties
-def RELEASE_STORE_FILE = file('s.keystore.temp')
+def RELEASE_STORE_FILE = file('temp.jks')
 
 Properties properties = new Properties()
 // local.properties file in the root director
