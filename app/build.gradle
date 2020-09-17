@@ -70,10 +70,10 @@ if (keystoreFilepath) {
 android {
     signingConfigs {
         release {
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
+            keyAlias 'mellow'
+            keyPassword '123456'
             storeFile file("key.jks")
-            storePassword RELEASE_STORE_PASSWORD
+            storePassword '123456'
         }
     }
     compileSdkVersion 28
